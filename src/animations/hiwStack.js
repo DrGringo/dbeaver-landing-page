@@ -57,7 +57,7 @@ export function initHiwStack({ prefersReducedMotion }) {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: viewport,
-      start: 'top top+=90',
+      start: 'top top+=200',
       end: () => `+=${window.innerHeight * screensPerCard * (cards.length - 1)}`,
       pin: viewport,
       scrub: 1,

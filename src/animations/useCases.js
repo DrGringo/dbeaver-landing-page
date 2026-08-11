@@ -8,10 +8,11 @@ const CASES = [
       'A large insurance company needed a secure, centralized Redshift Serverless data hub with complex AWS IAM authentication, but DBeaver Community did not support the required drivers and IAM setup, and retraining hundreds of users on a new tool was unacceptable.',
       'They moved to DBeaver Lite Edition, which supports Redshift Serverless and advanced IAM, used standardized connection templates and documentation, and kept the familiar DBeaver interface so users could add the new Data Hub connection without any retraining.',
     ],
-    buttonText: "Read Fivetran's story",
+    buttonText: 'Read a story of a leading U.S. insurance company',
     buttonHref:
-      'https://dbeaver.com/2024/07/18/customer-story-aman-singh-the-senior-staff-software-engineer-at-fivetran/',
+      'https://dbeaver.com/2026/01/08/how-an-insurance-company-built-a-secure-data-hub-without-retraining-hundreds-of-users/',
     illustration: '/assets/illustrations/usecase-secure-data-hub.svg',
+    imgScale: 0.9,
   },
   {
     title: 'Secure web workspace',
@@ -81,6 +82,7 @@ export function initUseCases({ prefersReducedMotion }) {
       link.textContent = data.buttonText;
       link.href = data.buttonHref;
       imgEl.src = data.illustration;
+      imgEl.style.transform = data.imgScale ? `scale(${data.imgScale})` : '';
       index = nextIndex;
     };
 

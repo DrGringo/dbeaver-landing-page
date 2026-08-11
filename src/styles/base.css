@@ -1,0 +1,117 @@
+/* ------------------------------------------------------------------ *
+ * Fonts
+ * ------------------------------------------------------------------ *
+ * Lato is loaded from Google Fonts via <link> in index.html.
+ *
+ * Huben is the custom brand display face (Minor Praxis Huben), self-hosted
+ * from src/fonts/. The weight range lets any weight request (incl. 900 used by
+ * .display) map to the single file without synthetic bold.
+ * ------------------------------------------------------------------ */
+@font-face {
+  font-family: 'Huben';
+  src: url('../fonts/huben-regular.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Huben';
+  src: url('../fonts/huben-italic.woff') format('woff');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------------ *
+ * Reset
+ * ------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--c-text);
+  background: var(--c-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Stacked above .footer-reveal (see sections.css) with its own opaque
+   background, so page content visually slides over and uncovers the
+   sticky-pinned footer underneath, rather than the footer's dark panel
+   covering the tail end of the page. */
+main {
+  position: relative;
+  z-index: 2;
+  background: var(--c-white);
+  border-radius: 0 0 20px 20px;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ------------------------------------------------------------------ *
+ * Typography helpers
+ * ------------------------------------------------------------------ */
+.display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1.05;
+  /* 0% tracking for the Huben display face */
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--c-beige);
+}
+
+/* Shared layout container */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Reduced-motion: reveal everything up front */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

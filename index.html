@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBeaver — Manage data from 100+ data sources in one place</title>
+    <meta
+      name="description"
+      content="Query, explore, and manage data across your databases with built-in AI, without switching tools."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      document.documentElement.classList.remove('no-js');
+    </script>
+  </head>
+  <body>
+    <!-- ============================ NAV ============================ -->
+    <header class="nav" id="nav">
+      <div class="nav__inner">
+        <a class="nav__logo" href="#" aria-label="DBeaver home">
+          <img src="/assets/dbeaver-logo.svg" alt="DBeaver" />
+        </a>
+        <nav class="nav__links" aria-label="Primary">
+          <a href="#">Products</a>
+          <a href="#">Pricing</a>
+          <a href="#">Resources</a>
+          <a href="#">Documentation</a>
+        </nav>
+        <div class="nav__actions">
+          <a class="btn btn--white nav__btn" href="#">Support</a>
+          <a class="btn btn--white nav__btn" href="#">Get DBeaver</a>
+          <div class="nav__icons">
+            <button class="nav__icon" type="button" aria-label="Search">
+              <img src="/assets/icons/nav-search.svg" alt="" />
+            </button>
+            <button class="nav__icon" type="button" aria-label="Cart, 12 items">
+              <img src="/assets/icons/nav-cart.svg" alt="" />
+              <span class="nav__badge">12</span>
+            </button>
+            <button class="nav__icon" type="button" aria-label="Account">
+              <img src="/assets/icons/nav-user.svg" alt="" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============================ HERO ============================ -->
+      <section class="hero" id="hero">
+        <div class="container hero__inner">
+          <div class="hero__text">
+            <div class="rating-badges hero__ratings">
+              <div class="rating-badge rating-badge--dark">
+                <img class="rating-badge__icon" src="/assets/testimonials/capterra-badge-icon.svg" alt="" />
+                <span class="rating-badge__text">
+                  <span class="rating-badge__label">Overall rating</span>
+                  <img class="rating-badge__stars-img" src="/assets/testimonials/stars-rating.svg" alt="4.5 out of 5 stars" />
+                </span>
+              </div>
+              <div class="rating-badge rating-badge--light">
+                <img class="rating-badge__icon" src="/assets/testimonials/users-badge-icon.svg" alt="" />
+                <span class="rating-badge__text">
+                  <span class="rating-badge__label">Over 10 million</span>
+                  <span class="rating-badge__stars">unique users</span>
+                </span>
+              </div>
+            </div>
+
+            <h1 class="hero__title display" data-splitlines>
+              <span class="ln">Manage data from</span>
+              <span class="ln">100+ data sources</span>
+              <span class="ln accent">in one place</span>
+            </h1>
+
+            <div class="hero__cta">
+              <a class="btn btn--dark hero__btn" href="#">Get demo</a>
+              <a class="btn btn--primary hero__btn" href="#">Start free</a>
+            </div>
+          </div>
+
+          <div class="hero__showcase" data-reveal>
+            <div class="hero__slide">
+              <img
+                class="hero__slide-art"
+                src="/assets/illustrations/hero-cloud-engineer.svg"
+                alt=""
+                aria-hidden="true"
+                data-hero-art
+              />
+              <p class="hero__slide-text" data-hero-caption>
+                View data side-by-side and query in one place. AI in DBeaver
+                helps you write SQL faster and troubleshoot errors.
+              </p>
+            </div>
+            <div
+              class="hero__dots"
+              data-hero-dots
+              role="tablist"
+              aria-label="Highlighted use case"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= COMPANIES / LOGOS ======================= -->
+      <section class="companies" id="companies">
+        <div class="container">
+          <p class="companies__title" data-reveal>Trusted by world-class companies</p>
+          <div class="companies__row">
+            <div class="logo-card" data-logo><img src="/assets/brand/amazon.svg" alt="Amazon" /></div>
+            <div class="logo-card" data-logo><img src="/assets/brand/usbancorp.svg" alt="U.S. Bancorp" /></div>
+            <div class="logo-card" data-logo><img src="/assets/brand/mastercard.svg" alt="Mastercard" /></div>
+            <div class="logo-card logo-card--cvs" data-logo>
+              <span class="cvs">
+                <img src="/assets/brand/cvs-a.svg" alt="" />
+                <img src="/assets/brand/cvs-b.svg" alt="CVS Health" />
+              </span>
+            </div>
+            <div class="logo-card" data-logo><img src="/assets/brand/apple.svg" alt="Apple" /></div>
+            <div class="logo-card" data-logo><img src="/assets/brand/tmobile.svg" alt="T-Mobile" /></div>
+            <div class="logo-card" data-logo><img src="/assets/brand/united.svg" alt="United Airlines" /></div>
+          </div>
+          <span class="companies__pill" data-reveal>DBeaver clients</span>
+        </div>
+      </section>
+
+      <!-- ======================= AI WEBINAR BANNER ======================= -->
+      <section class="ai-banner" id="ai-banner">
+        <div class="ai-banner__inner">
+          <div>
+            <span class="ai-banner__tag" data-reveal>Webinar</span>
+            <h2 class="ai-banner__title" data-reveal>
+              How to Transform Database Workflows with AI
+            </h2>
+          </div>
+          <div class="ai-banner__right">
+            <span class="ai-banner__date" data-reveal>July 24th, 11 AM CT</span>
+            <a class="btn btn--primary" href="#" data-reveal>Register</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= PRODUCT SELECTOR ======================= -->
+      <section class="product" id="product">
+        <div class="container">
+          <h2 class="product__title display" data-reveal>Find your DBeaver Edition</h2>
+          <div class="product__quiz" data-quiz-root data-reveal></div>
+          <a
+            class="btn btn--outline product__compare-btn"
+            href="https://dbeaver.com/edition/"
+            target="_blank"
+            rel="noopener"
+            data-reveal
+          >
+            See detailed comparison
+          </a>
+        </div>
+      </section>
+
+      <!-- ========================== HOW IT WORKS ========================== -->
+      <section class="how-it-works" id="how-it-works">
+        <div class="container">
+        <div class="hiw-stack" data-hiw-stack data-reveal>
+        <div class="hiw-stack__viewport" data-hiw-viewport>
+        <div class="hiw-cards">
+          <article class="hiw-card">
+            <div class="hiw-card__icon" aria-hidden="true">
+              <img src="/assets/illustrations/hiw/card1-databases.svg" alt="" />
+            </div>
+            <div class="hiw-card__body">
+              <h3 class="hiw-card__title">Connect to 100+ databases</h3>
+              <p class="hiw-card__text">PostgreSQL, MySQL, MongoDB, Oracle, SQL Server, and more.</p>
+              <a class="btn btn--dark btn--sm" href="https://dbeaver.com/databases/" target="_blank" rel="noopener">
+                Supported Databases
+              </a>
+            </div>
+          </article>
+
+          <article class="hiw-card">
+            <div class="hiw-card__icon" aria-hidden="true">
+              <img src="/assets/illustrations/hiw/card2-mcp.svg" alt="" />
+            </div>
+            <div class="hiw-card__body">
+              <h3 class="hiw-card__title">Connect AI tools through MCP</h3>
+              <p class="hiw-card__text">
+                In Desktop DBeaver PRO editions, users can extend AI Assistant by connecting
+                to MCP servers. In Web DBeaver PRO editions, DBeaver can act as a bridge
+                between databases and external AI tools like Cursor, VS Code, or Claude.
+              </p>
+              <div class="hiw-card__actions">
+                <a class="btn btn--dark btn--sm" href="https://dbeaver.com/docs/dbeaver/AI-Tools-and-MCP/" target="_blank" rel="noopener">
+                  MCP Support
+                </a>
+                <a class="btn btn--dark btn--sm" href="https://dbeaver.com/docs/team-edition/web/Model-Context-Protocol-Server/" target="_blank" rel="noopener">
+                  MCP Integration
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="hiw-card">
+            <div class="hiw-card__icon" aria-hidden="true">
+              <img src="/assets/illustrations/hiw/card3-ai-chat.svg" alt="" />
+            </div>
+            <div class="hiw-card__body">
+              <h3 class="hiw-card__title">Work with Data with AI Chat</h3>
+              <p class="hiw-card__text">
+                AI Chat gives analysts, PMs, and support engineers self-serve answers
+                directly from data. For power users, SQL scripting becomes faster, and
+                running Data Transfer, Data Compare, and Schema Compare from chat simplifies
+                routine DBA and data-engineering work.
+              </p>
+              <a class="btn btn--dark btn--sm" href="https://dbeaver.com/docs/dbeaver/AI-chat/" target="_blank" rel="noopener">
+                AI Chat
+              </a>
+            </div>
+          </article>
+
+          <article class="hiw-card">
+            <div class="hiw-card__icon" aria-hidden="true">
+              <img src="/assets/illustrations/hiw/card4-ai-assistant.svg" alt="" />
+            </div>
+            <div class="hiw-card__body">
+              <h3 class="hiw-card__title">Turn on (or off) AI Assistant across DBeaver</h3>
+              <p class="hiw-card__text">
+                AI Assistant makes AI a part of the daily-used database workflow across the
+                whole team, so analysts, developers, and DBAs all get faster query writing,
+                error fixing, and object exploration in one place.
+              </p>
+              <a class="btn btn--dark btn--sm" href="https://dbeaver.com/docs/dbeaver/AI-Smart-Assistance/" target="_blank" rel="noopener">
+                AI Assistant
+              </a>
+            </div>
+          </article>
+        </div>
+        </div>
+        </div>
+        </div>
+      </section>
+
+      <!-- ============================ WHO IS IT FOR ============================ -->
+      <section class="roles" id="roles">
+        <div class="container roles__header" data-reveal>
+          <span class="tag-pill">For every role</span>
+          <h2 class="roles__title display">Who is it for?</h2>
+        </div>
+
+        <div class="container roles__cards">
+          <div class="roles__line" aria-hidden="true"></div>
+          <article class="role-card" data-reveal style="--rot: 5.32deg">
+            <div class="role-card__panel">
+              <div class="role-card__illustration" aria-hidden="true">
+                <img src="/assets/illustrations/developer-role.svg" alt="" />
+              </div>
+              <h3>Developers</h3>
+              <p>Write and debug SQL faster with full context.</p>
+            </div>
+          </article>
+
+          <article class="role-card" data-reveal style="--rot: -4.9deg">
+            <div class="role-card__panel">
+              <div class="role-card__illustration" aria-hidden="true">
+                <img src="/assets/illustrations/data-engineer-role.svg" alt="" />
+              </div>
+              <h3>Data Engineers</h3>
+              <p>Manage pipelines and transformations across systems.</p>
+            </div>
+          </article>
+
+          <article class="role-card" data-reveal style="--rot: 0deg">
+            <div class="role-card__panel">
+              <div class="role-card__illustration" aria-hidden="true">
+                <img src="/assets/illustrations/dba-role.svg" alt="" />
+              </div>
+              <h3>DBAs</h3>
+              <p>Monitor, inspect, and control database health.</p>
+            </div>
+          </article>
+
+          <article class="role-card" data-reveal style="--rot: 7.1deg">
+            <div class="role-card__panel">
+              <div class="role-card__illustration" aria-hidden="true">
+                <img src="/assets/illustrations/analyst-role.svg" alt="" />
+              </div>
+              <h3>Analysts</h3>
+              <p>Explore and extract insights without engineering bottlenecks.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================ USE CASES ============================ -->
+      <section class="usecases" id="usecases">
+        <div class="container usecases__card">
+          <div class="usecases__top" data-reveal>
+            <span class="tag-pill tag-pill--red">Use cases</span>
+            <div class="usecases__controls">
+              <button class="usecases__arrow" type="button" aria-label="Previous use case" data-usecase-prev>
+                <img src="/assets/icons/arrow-white.svg" alt="" />
+              </button>
+              <button class="usecases__arrow usecases__arrow--next" type="button" aria-label="Next use case" data-usecase-next>
+                <img src="/assets/icons/arrow-white.svg" alt="" />
+              </button>
+            </div>
+          </div>
+
+          <div class="usecases__body">
+            <div class="usecases__text" data-reveal data-usecase-text>
+              <h2 class="usecases__title display">Secure data hub</h2>
+              <p>
+                A large insurance company needed a secure, centralized Redshift
+                Serverless data hub with complex AWS IAM authentication, but
+                DBeaver Community did not support the required drivers and IAM
+                setup, and retraining hundreds of users on a new tool was
+                unacceptable.
+              </p>
+              <p>
+                They moved to DBeaver Lite Edition, which supports Redshift
+                Serverless and advanced IAM, used standardized connection
+                templates and documentation, and kept the familiar DBeaver
+                interface so users could add the new Data Hub connection
+                without any retraining.
+              </p>
+              <a
+                class="btn btn--white btn--sm"
+                href="https://dbeaver.com/2024/07/18/customer-story-aman-singh-the-senior-staff-software-engineer-at-fivetran/"
+                target="_blank"
+                rel="noopener"
+              >
+                Read Fivetran's story
+              </a>
+            </div>
+
+            <div class="usecases__illustration" data-reveal aria-hidden="true">
+              <img data-usecase-img src="/assets/illustrations/usecase-secure-data-hub.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ ECOSYSTEM ============================ -->
+      <section class="ecosystem" id="ecosystem">
+        <h2 class="ecosystem__title display" data-reveal>Centralized User<br />Management</h2>
+
+        <div class="eco-cards">
+          <article class="eco-card" data-reveal style="--rot: -20deg">
+            <div class="eco-card__panel">
+              <h3>Authentication</h3>
+              <div class="eco-card__logos">
+                <img src="/assets/ecosystem/auth-1.png" alt="" />
+                <img src="/assets/ecosystem/cloud-1.png" alt="" />
+                <img src="/assets/ecosystem/auth-3.png" alt="" />
+                <img src="/assets/ecosystem/auth-4.png" alt="" />
+              </div>
+            </div>
+          </article>
+
+          <article class="eco-card" data-reveal style="--rot: -10deg">
+            <div class="eco-card__panel">
+              <h3>Orchestration</h3>
+              <div class="eco-card__logos">
+                <img src="/assets/ecosystem/orch-1.png" alt="Docker" />
+                <img src="/assets/ecosystem/orch-2.png" alt="Kubernetes" />
+              </div>
+            </div>
+          </article>
+
+          <article class="eco-card" data-reveal style="--rot: 0deg">
+            <div class="eco-card__panel">
+              <h3>Databases<br />in the Cloud</h3>
+              <div class="eco-card__logos">
+                <img src="/assets/ecosystem/cloud-1.png" alt="AWS" />
+                <img src="/assets/ecosystem/cloud-2.png" alt="Azure" />
+                <img src="/assets/ecosystem/cloud-3.png" alt="Google Cloud" />
+              </div>
+            </div>
+          </article>
+
+          <article class="eco-card" data-reveal style="--rot: 10deg">
+            <div class="eco-card__panel">
+              <h3>Ai integration</h3>
+              <div class="eco-card__logos eco-card__logos--ai">
+                <img class="eco-icon-sm" src="/assets/ecosystem/ai-ollama.svg" alt="" />
+                <img class="eco-icon-sm" src="/assets/ecosystem/ai-icon2.svg" alt="" />
+                <img class="eco-icon-sm" src="/assets/ecosystem/ai-icon3.svg" alt="" />
+                <img class="eco-text-sm" src="/assets/ecosystem/ai-text1.svg" alt="" />
+                <div class="gemini-logo" aria-hidden="true">
+                  <img style="left:0; top:0; width:13.52px; height:13.52px" src="/assets/ecosystem/gemini-v8.svg" alt="" />
+                  <img style="left:16.9px; top:1.49px; width:10.36px; height:10.5px" src="/assets/ecosystem/gemini-v7.svg" alt="" />
+                  <img style="left:27.94px; top:4.38px; width:7.14px; height:7.61px" src="/assets/ecosystem/gemini-v6.svg" alt="" />
+                  <img style="left:35.93px; top:4.38px; width:10.96px; height:7.38px" src="/assets/ecosystem/gemini-v5.svg" alt="" />
+                  <img style="left:47.68px; top:1.51px; width:2.08px; height:10.25px" src="/assets/ecosystem/gemini-v4.svg" alt="" />
+                  <img style="left:50.61px; top:4.38px; width:6.5px; height:7.38px" src="/assets/ecosystem/gemini-v3.svg" alt="" />
+                  <img style="left:57.92px; top:1.51px; width:2.08px; height:10.25px" src="/assets/ecosystem/gemini-v2.svg" alt="" />
+                </div>
+                <img class="eco-text-sm" src="/assets/ecosystem/ai-text2.svg" alt="" />
+                <span class="eco-lockup">
+                  <img class="eco-icon-sm" src="/assets/ecosystem/ai-icon4.svg" alt="" />
+                  <img class="eco-text-sm" src="/assets/ecosystem/ai-text3.svg" alt="" />
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="eco-card" data-reveal style="--rot: 20deg">
+            <div class="eco-card__panel">
+              <h3>Database<br />On-Premise</h3>
+              <div class="eco-card__logos">
+                <img src="/assets/ecosystem/onprem-1.png" alt="" />
+                <img src="/assets/ecosystem/onprem-2.png" alt="" />
+                <img src="/assets/ecosystem/onprem-3.png" alt="" />
+                <img src="/assets/ecosystem/onprem-4.png" alt="" />
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="ecosystem__wordmark-wrap" data-reveal>
+          <p class="ecosystem__wordmark">
+            Data ec<img class="ecosystem__mark" src="/assets/ecosystem/ecosystem-mark.svg" alt="" />system
+          </p>
+        </div>
+
+        <a class="btn btn--primary" href="https://dbeaver.com/dbeaver-integrations/" target="_blank" rel="noopener" data-reveal>
+          Explore Integrations
+        </a>
+      </section>
+
+      <!-- ========================== TESTIMONIALS ========================== -->
+      <section class="testimonials" id="testimonials">
+        <div class="container testimonials__header" data-reveal>
+          <h2 class="testimonials__title display">What users say</h2>
+          <div class="testimonials__top-row">
+            <div class="testimonials__social">
+              <a href="https://x.com" target="_blank" rel="noopener" aria-label="X (Twitter)">
+                <img src="/assets/testimonials/social-x.svg" alt="" />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+                <img src="/assets/testimonials/social-youtube.svg" alt="" />
+              </a>
+              <a href="https://t.me" target="_blank" rel="noopener" aria-label="Telegram">
+                <img src="/assets/testimonials/social-telegram.svg" alt="" />
+              </a>
+              <a href="https://reddit.com" target="_blank" rel="noopener" aria-label="Reddit">
+                <img src="/assets/testimonials/social-reddit.svg" alt="" />
+              </a>
+            </div>
+            <div class="testimonials__controls">
+              <button class="testimonials__arrow" type="button" aria-label="Previous testimonial" data-prev>
+                <img src="/assets/testimonials/arrow.svg" alt="" />
+              </button>
+              <button class="testimonials__arrow testimonials__arrow--next" type="button" aria-label="Next testimonial" data-next>
+                <img src="/assets/testimonials/arrow.svg" alt="" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonials__track" data-reveal data-track>
+          <article class="testimonial-card">
+            <div class="testimonial-card__top">
+              <img class="testimonial-card__avatar" src="/assets/testimonials/avatar-swarnima-2.png" alt="" />
+              <div class="testimonial-card__person">
+                <p class="testimonial-card__name">Swarnima G.</p>
+                <p class="testimonial-card__role">Senior SAP Commerce Engineer</p>
+              </div>
+              <div class="testimonial-card__logo"><img src="/assets/testimonials/card-logo-g2.svg" alt="G2" /></div>
+            </div>
+            <p class="testimonial-card__quote">"All in one database tool that improves productivity and simplifies workflow"</p>
+            <p class="testimonial-card__body">
+              What I like best about DBeaver is how easy it makes working with multiple
+              databases in one place. Instead of switching between different tools,
+              everything is available in a single interface, which really improves daily
+              workflow...
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-card__top">
+              <img class="testimonial-card__avatar" src="/assets/testimonials/avatar-arjun.png" alt="" />
+              <div class="testimonial-card__person">
+                <p class="testimonial-card__name">Arjun D.</p>
+                <p class="testimonial-card__role">QA Engineer</p>
+              </div>
+              <div class="testimonial-card__logo"><img src="/assets/testimonials/card-logo-g2.svg" alt="G2" /></div>
+            </div>
+            <p class="testimonial-card__quote">"Streamlining Database Workflows with DBeaver"</p>
+            <p class="testimonial-card__body">
+              What I like most about DBeaver is how it lets me work with multiple
+              databases in one place through a clean, intuitive UI. I regularly rely on
+              the SQL editor, especially the auto-completion and query execution
+              history, which make writing, troubleshooting, and debugging queries much
+              faster...
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-card__top">
+              <img class="testimonial-card__avatar" src="/assets/testimonials/avatar-swarnima-2.png" alt="" />
+              <div class="testimonial-card__person">
+                <p class="testimonial-card__name">Stuart P.</p>
+                <p class="testimonial-card__role">Product Owner</p>
+              </div>
+              <div class="testimonial-card__logo"><img src="/assets/testimonials/card-logo-capterra.svg" alt="Capterra" /></div>
+            </div>
+            <p class="testimonial-card__quote">"Great dB client"</p>
+            <p class="testimonial-card__body">
+              I was introduced to it be a fellow hobbyist and developer and haven't
+              looked back. I use it with postgrsql and connect to local and hosted
+              databases.
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-card__top">
+              <img class="testimonial-card__avatar" src="/assets/testimonials/avatar-swarnima-1.png" alt="" />
+              <div class="testimonial-card__person">
+                <p class="testimonial-card__name">Priya N.</p>
+                <p class="testimonial-card__role">Data Engineer</p>
+              </div>
+              <div class="testimonial-card__logo"><img src="/assets/testimonials/card-logo-capterra.svg" alt="Capterra" /></div>
+            </div>
+            <p class="testimonial-card__quote">"Handles every database I throw at it"</p>
+            <p class="testimonial-card__body">
+              We connect to Postgres, MySQL, and a handful of NoSQL stores, and
+              DBeaver is the one tool that covers all of them without switching
+              context. The ER diagrams and schema compare features save our team
+              hours every sprint...
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-card__top">
+              <img class="testimonial-card__avatar" src="/assets/testimonials/avatar-arjun.png" alt="" />
+              <div class="testimonial-card__person">
+                <p class="testimonial-card__name">Marcus T.</p>
+                <p class="testimonial-card__role">Backend Developer</p>
+              </div>
+              <div class="testimonial-card__logo"><img src="/assets/testimonials/card-logo-g2.svg" alt="G2" /></div>
+            </div>
+            <p class="testimonial-card__quote">"The AI assistant actually speeds things up"</p>
+            <p class="testimonial-card__body">
+              I was skeptical about the built-in AI features, but generating and
+              explaining SQL against our schema turned out to be genuinely useful.
+              Combined with the data editor, it's replaced three other tools on my
+              machine...
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================ NEWSLETTER ============================ -->
+      <section class="newsletter" id="newsletter">
+        <div class="container newsletter__wrap" data-reveal>
+          <div class="newsletter__card">
+            <img class="newsletter__pattern" src="/assets/newsletter/bg-pattern.svg" alt="" aria-hidden="true" />
+            <div class="newsletter__intro">
+              <h2 class="newsletter__title display">Subscribe to our newsletter</h2>
+              <p class="newsletter__sub">Contact us about custom pricing for your organization.</p>
+            </div>
+            <form class="newsletter__form" novalidate>
+              <div class="newsletter__field">
+                <label for="newsletter-email">Email</label>
+                <input type="email" id="newsletter-email" name="email" placeholder="you@company.com" required />
+              </div>
+              <div class="newsletter__checks">
+                <label class="newsletter__check">
+                  <input type="checkbox" name="consent" required />
+                  <span>I consent to provide my data</span>
+                </label>
+                <label class="newsletter__check">
+                  <input type="checkbox" name="subscribe" />
+                  <span>Subscribe to a monthly Newsletter</span>
+                </label>
+              </div>
+              <button class="btn btn--primary newsletter__submit" type="submit">Submit</button>
+            </form>
+          </div>
+          <img class="newsletter__beaver" src="/assets/newsletter/beaver-illustration.svg" alt="" aria-hidden="true" />
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================ FOOTER (sticky reveal) ============================ -->
+    <div class="footer-reveal" id="footerReveal">
+      <div class="footer-reveal__runway">
+        <div class="footer-reveal__sticky">
+          <footer class="site-footer">
+            <div class="container">
+        <div class="site-footer__cols">
+          <div class="site-footer__col">
+            <p class="site-footer__heading">Products</p>
+            <a href="https://dbeaver.com/dbeaver-enterprise/" target="_blank" rel="noopener">DBeaver Enterprise</a>
+            <a href="https://dbeaver.com/dbeaver-ultimate/" target="_blank" rel="noopener">DBeaver Ultimate</a>
+            <a href="https://dbeaver.com/dbeaver-lite/" target="_blank" rel="noopener">DBeaver Lite</a>
+            <a href="https://dbeaver.com/cloudbeaver-enterprise/" target="_blank" rel="noopener">CloudBeaver Enterprise</a>
+            <a href="https://dbeaver.com/dbeaver-team-edition/" target="_blank" rel="noopener">DBeaver Team Edition</a>
+            <a href="https://dbeaver.com/dbvr/" target="_blank" rel="noopener">dbvr</a>
+            <a href="https://dbeaver.com/edition/" target="_blank" rel="noopener">Compare products</a>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__heading">Download</p>
+            <a href="https://dbeaver.com/dbeaver-enterprise/#download" target="_blank" rel="noopener">DBeaver Enterprise</a>
+            <a href="https://dbeaver.com/dbeaver-ultimate/#download" target="_blank" rel="noopener">DBeaver Ultimate</a>
+            <a href="https://dbeaver.com/dbeaver-lite/#download" target="_blank" rel="noopener">DBeaver Lite</a>
+            <a href="https://dbeaver.com/cloudbeaver-enterprise/#download" target="_blank" rel="noopener">CloudBeaver Enterprise</a>
+            <a href="https://dbeaver.com/dbeaver-team-edition/#download" target="_blank" rel="noopener">DBeaver Team Edition</a>
+            <a href="https://dbeaver.com/dbvr/#download" target="_blank" rel="noopener">dbvr</a>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__heading">Pricing</p>
+            <a href="https://dbeaver.com/buy/" target="_blank" rel="noopener">Buy a license</a>
+            <a href="https://dbeaver.com/license-types/" target="_blank" rel="noopener">License types</a>
+            <a href="https://dbeaver.com/trial/" target="_blank" rel="noopener">Try for free</a>
+            <a href="https://dbeaver.com/academic-license/" target="_blank" rel="noopener">Academic licenses</a>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__heading">Resources</p>
+            <a href="https://dbeaver.com/databases/" target="_blank" rel="noopener">Supported databases</a>
+            <a href="https://dbeaver.com/dbeaver-integrations/" target="_blank" rel="noopener">DBeaver integrations</a>
+            <a href="https://dbeaver.com/use-cases/" target="_blank" rel="noopener">Use cases</a>
+            <a href="https://dbeaver.com/blog/" target="_blank" rel="noopener">Blog</a>
+            <a href="https://www.youtube.com/@DBeaver_video" target="_blank" rel="noopener">Video</a>
+            <a href="https://dbeaver.com/events/" target="_blank" rel="noopener">Events</a>
+            <a href="https://dbeaver.com/support/" target="_blank" rel="noopener">Contact support</a>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__heading">Documentation</p>
+            <a href="https://dbeaver.com/docs/dbeaver/" target="_blank" rel="noopener">DBeaver desktop products</a>
+            <a href="https://dbeaver.com/docs/cloudbeaver/" target="_blank" rel="noopener">CloudBeaver Enterprise</a>
+            <a href="https://dbeaver.com/docs/team-edition/" target="_blank" rel="noopener">DBeaver Team Edition</a>
+            <a href="https://dbeaver.com/docs/dbvr/" target="_blank" rel="noopener">dbvr</a>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__heading">For partners</p>
+            <a href="https://dbeaver.com/become-a-sales-partner/" target="_blank" rel="noopener">Become a partner</a>
+            <a href="https://dbeaver.com/resellers/" target="_blank" rel="noopener">Resellers</a>
+            <a href="https://dbeaver.com/partners/" target="_blank" rel="noopener">Technology partners</a>
+            <a href="https://dbeaver.com/clients/universities/" target="_blank" rel="noopener">Universities</a>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__heading">About us</p>
+            <a href="https://dbeaver.com/company/" target="_blank" rel="noopener">Company</a>
+            <a href="https://dbeaver.com/clients/" target="_blank" rel="noopener">Customers</a>
+            <a href="https://dbeaver.com/company/contact/" target="_blank" rel="noopener">Contacts</a>
+            <a href="https://dbeaver.com/join-the-dbeaver-team/" target="_blank" rel="noopener">Careers</a>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__heading">Legal</p>
+            <a href="https://dbeaver.com/privacy/" target="_blank" rel="noopener">Privacy</a>
+            <a href="https://dbeaver.com/sla/" target="_blank" rel="noopener">Service Level Agreement</a>
+            <a href="https://dbeaver.com/dbeaver-enterprise-software-agreement/" target="_blank" rel="noopener">Enterprise Software Agreement</a>
+            <a href="https://dbeaver.com/eula/" target="_blank" rel="noopener">EULA</a>
+          </div>
+        </div>
+
+        <div class="site-footer__divider"></div>
+
+        <div class="site-footer__bottom">
+          <img class="site-footer__logo" src="/assets/footer/db-logo.svg" alt="DBeaver" />
+          <div class="site-footer__bottom-right">
+            <div class="site-footer__social">
+              <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+                <img src="/assets/footer/social-facebook.svg" alt="" />
+              </a>
+              <a href="https://x.com" target="_blank" rel="noopener" aria-label="X (Twitter)">
+                <img src="/assets/footer/social-x.svg" alt="" />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+                <img src="/assets/footer/social-youtube.svg" alt="" />
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <img src="/assets/footer/social-linkedin.svg" alt="" />
+              </a>
+              <a href="https://t.me" target="_blank" rel="noopener" aria-label="Telegram">
+                <img src="/assets/footer/social-telegram.svg" alt="" />
+              </a>
+              <a href="https://reddit.com" target="_blank" rel="noopener" aria-label="Reddit">
+                <img src="/assets/footer/social-reddit.svg" alt="" />
+              </a>
+            </div>
+            <p class="site-footer__rights">All rights reserved. 2026</p>
+          </div>
+        </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

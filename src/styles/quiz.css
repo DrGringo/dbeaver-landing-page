@@ -1,0 +1,356 @@
+/* ================================================================== *
+ * Product Match — inline quiz within the Product Selector section
+ * ================================================================== */
+.product__quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Progress bar + Back button row */
+.quiz-progress {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 48px;
+}
+.quiz-progress__track {
+  height: 8px;
+  border-radius: var(--radius-small);
+  background: var(--c-light-grey);
+  overflow: hidden;
+}
+.quiz-progress__fill {
+  height: 100%;
+  border-radius: var(--radius-small);
+  background: var(--c-red);
+  transition: width 0.35s ease;
+}
+.quiz-back {
+  position: absolute;
+  top: -16px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 20px 0 10px;
+  border-radius: var(--radius-round);
+  background: var(--c-white);
+  border: 1px solid var(--c-brown);
+  color: var(--c-brown);
+  font-weight: 900;
+  font-size: 16px;
+}
+.quiz-back__icon {
+  width: 17px;
+  height: 8px;
+}
+
+/* Question / result card */
+.quiz-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  width: 100%;
+  max-width: 900px;
+  min-height: 300px;
+  margin: 0 auto;
+  padding: 48px 64px;
+  border-radius: var(--radius-main);
+  background: var(--c-white);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+.quiz-card__question {
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--c-text);
+  max-width: 480px;
+}
+.quiz-card__choices {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.quiz-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 160px;
+  height: 40px;
+  padding: 14px 20px;
+  border-radius: var(--radius-round);
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--c-white);
+  transition: opacity 0.2s ease;
+}
+.quiz-pill:hover {
+  opacity: 0.8;
+}
+.quiz-pill--yes {
+  background: var(--c-brown);
+}
+.quiz-pill--no {
+  background: var(--c-red);
+}
+
+/* Decorative icon-grid backdrop behind the first question's card only
+   (Figma node 9641:59516). Two 5x5 grids flank a centered, absolutely
+   positioned card so the grids can span the full row width independent of
+   the card's own size. */
+/* Fixed height (matches the 5x82px + 4x8px-gap grid) so the card/progress/
+   title sit at the same position on every step — this wrapper is used on
+   every step now, not just the first one with the decorative grid. */
+.quiz-grid-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  min-height: 442px;
+  padding: 0 0px;
+}
+.quiz-grid-row .quiz-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 82px);
+  grid-template-rows: repeat(5, 82px);
+  gap: 8px;
+  flex-shrink: 0;
+}
+.quiz-grid__cell {
+  width: 82px;
+  height: 82px;
+  border-radius: var(--radius-main);
+  background: var(--c-light-grey);
+}
+.quiz-grid__cell--white {
+  background: var(--c-white);
+}
+.quiz-grid__badge {
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-main);
+  background: var(--c-white);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+.quiz-grid__badge--circle {
+  overflow: hidden;
+}
+.quiz-grid__badge--circle img {
+  border-radius: 50%;
+  border: 2px solid var(--c-dark-brown);
+  background: var(--c-white);
+  box-shadow: var(--shadow-badge);
+  object-fit: cover;
+  object-position: top;
+}
+/* Step layout: progress row above card, choices centered under question */
+.quiz-step {
+  width: 100%;
+}
+.quiz-step .quiz-card {
+  flex-direction: column;
+}
+
+/* Result screen */
+.quiz-result {
+  width: 100%;
+}
+.quiz-result .quiz-card--result {
+  justify-content: flex-start;
+  text-align: left;
+}
+.quiz-result__icon-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  flex-shrink: 0;
+}
+.quiz-result__icon {
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+}
+.quiz-result__icon svg,
+.quiz-result__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.quiz-result__body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  color: var(--c-brown);
+}
+.quiz-result__name {
+  font-weight: 900;
+  font-size: 24px;
+}
+.quiz-result__desc {
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+/* Compare products */
+.quiz-compare {
+  width: 100%;
+  max-width: 900px;
+  margin: 64px auto 0;
+  text-align: left;
+}
+.quiz-compare__title {
+  font-size: 36px;
+  color: var(--c-brown);
+  margin-bottom: 64px;
+}
+.quiz-compare__cols {
+  display: flex;
+  gap: 48px;
+}
+.quiz-compare__col {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+.quiz-compare__select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 14px 20px;
+  border-radius: var(--radius-round);
+  border: 1px solid var(--c-brown);
+  color: var(--c-brown);
+  font-size: 16px;
+}
+.quiz-compare__select svg {
+  width: 12px;
+  transform: rotate(180deg);
+}
+.quiz-compare__pricing {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.quiz-compare__pricing-label {
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--c-text);
+}
+.quiz-compare__price {
+  text-align: right;
+}
+.quiz-compare__price p {
+  font-weight: 900;
+  font-size: 50px;
+  color: var(--c-text);
+  line-height: 1.2;
+}
+.quiz-compare__price span:first-child {
+  font-size: 24px;
+}
+.quiz-compare__price-sub {
+  display: block;
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--c-text);
+}
+.quiz-compare__group {
+  padding-left: 24px;
+}
+.quiz-compare__cat {
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--c-text);
+  margin-bottom: 48px;
+}
+.quiz-compare__list p {
+  font-size: 16px;
+  color: var(--c-text);
+  margin-bottom: 10px;
+}
+.quiz-compare__list p:last-child {
+  margin-bottom: 0;
+}
+
+.quiz-detailed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 64px;
+  padding: 14px 20px;
+  border-radius: var(--radius-round);
+  background: var(--c-brown);
+  color: var(--c-white);
+  font-weight: 900;
+  font-size: 16px;
+  transition: opacity 0.2s ease;
+}
+.quiz-detailed:hover {
+  opacity: 0.8;
+}
+
+/* The 442px-wide decorative grids don't fit narrower viewports — drop them
+   and let the card center in normal flow instead. */
+@media (max-width: 1180px) {
+  .quiz-grid {
+    display: none;
+  }
+  .quiz-grid-row {
+    min-height: 0;
+    padding: 0;
+    justify-content: center;
+  }
+  .quiz-grid-row .quiz-card {
+    position: static;
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .quiz-card {
+    padding: 40px 24px;
+  }
+  .quiz-card--result {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .quiz-compare__cols {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .quiz-card__choices {
+    gap: 16px;
+  }
+  .quiz-pill {
+    width: auto;
+    flex: 1;
+  }
+}

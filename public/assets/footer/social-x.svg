@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="xMidYMid meet" width="30" height="30" overflow="visible" style="display: block;" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="x link" clip-path="url(#clip0_9318_28364)">
+<path id="Subtract" d="M4.39268 4.39297C10.2505 -1.46495 19.7477 -1.46492 25.6056 4.39297C31.4634 10.251 31.4634 19.7488 25.6056 25.6068C19.7477 31.4647 10.2505 31.4647 4.39268 25.6068C-1.46518 19.7488 -1.46518 10.251 4.39268 4.39297ZM6.99913 6.99942L13.0235 15.1908L7.31944 21.9994H9.77159L14.1964 16.7523L18.0616 21.9994H22.9991L16.7081 13.3647L22.0929 6.99942H19.6407L15.5509 11.7924L12.0587 6.99942H6.99913ZM11.3448 8.43887L20.1417 20.5053H18.7823L9.88389 8.43887H11.3448Z" fill="var(--fill-0, white)"/>
+</g>
+<defs>
+<clipPath id="clip0_9318_28364">
+<rect width="30" height="30" fill="white"/>
+</clipPath>
+</defs>
+</svg>

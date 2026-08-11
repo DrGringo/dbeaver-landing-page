@@ -1,0 +1,44 @@
+/* Design tokens — sourced from the DBeaver Figma UI kit variables */
+:root {
+  /* Colors — primary */
+  --c-brown: #302220;
+  --c-dark-brown: #080505;
+  --c-dark-beige: #605751;
+  --c-beige: #a6958b;
+  --c-red: #cf4a27;
+  --c-ochre: #ebdfa8;
+
+  /* Colors — secondary */
+  --c-white: #ffffff;
+  --c-light-grey: #f1f1f1;
+  --c-grey: #a5a5a5;
+  --c-text: #303030;
+
+  /* Spacing scale */
+  --space-3xs: 8px;
+  --space-2xs: 16px;
+  --space-xs: 24px;
+  --space-s: 32px;
+  --space-m: 48px;
+  --space-l: 64px;
+  --space-xl: 96px;
+  --space-2xl: 160px;
+
+  /* Radius */
+  --radius-small: 8px;
+  --radius-main: 20px;
+  --radius-huge: 40px;
+  --radius-round: 99999px;
+
+  /* Typography */
+  --font-display: 'Huben', 'Lato', system-ui, sans-serif;
+  --font-body: 'Lato', system-ui, sans-serif;
+
+  /* Elevation */
+  --shadow-badge: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 2px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 0 4px rgba(0, 0, 0, 0.05), 0 0 20px rgba(0, 0, 0, 0.2);
+
+  /* Layout */
+  --container: 1200px;
+  --nav-h: 80px;
+}

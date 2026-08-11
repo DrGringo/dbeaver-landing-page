@@ -1,0 +1,1549 @@
+/* ================================================================== *
+ * Buttons
+ * ================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 12px 22px;
+  border-radius: var(--radius-round);
+  transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
+}
+.btn:hover {
+  opacity: 0.8;
+}
+.btn--primary {
+  background: var(--c-red);
+  color: var(--c-white);
+}
+.btn--primary:hover {
+  background: #b93f20;
+}
+.btn--dark {
+  background: var(--c-dark-brown);
+  color: var(--c-white);
+}
+.btn--outline {
+  background: transparent;
+  color: var(--c-brown);
+  border: 1px solid rgba(48, 34, 32, 0.25);
+}
+.btn--outline-light {
+  background: transparent;
+  color: var(--c-white);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.btn--sm {
+  font-size: 14px;
+  padding: 9px 18px;
+}
+
+/* ================================================================== *
+ * Navigation
+ * ================================================================== */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  background: var(--c-light-grey);
+  transition: box-shadow 0.3s ease, height 0.3s ease;
+}
+.nav.is-scrolled {
+  box-shadow: 0 1px 0 rgba(48, 34, 32, 0.08);
+  height: 64px;
+}
+/* Matches .hero__inner's wider track so the logo lines up with the headline. */
+.nav__inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+.nav__logo {
+  width: 138px;
+  flex-shrink: 0;
+}
+/* The Figma SVG uses preserveAspectRatio="none" + width/height:100%, so it
+   fills whatever box it's given. Pin the box to the logo's real aspect ratio
+   (viewBox 153.003 x 56.0117) so it can't stretch. */
+.nav__logo img {
+  width: 138px;
+  height: auto;
+  aspect-ratio: 153.003 / 56.0117;
+}
+.nav__links {
+  display: flex;
+  gap: 32px;
+  margin-inline: auto;
+}
+.nav__links a {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--c-brown);
+  transition: opacity 0.2s ease;
+}
+.nav__links a:hover {
+  opacity: 0.7;
+}
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+/* Pill buttons in the bar are a fixed 40px tall, so padding drives width only. */
+.nav__btn {
+  height: 40px;
+  padding: 0 20px;
+}
+.nav__icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 16px;
+}
+.nav__icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-round);
+  background: var(--c-brown);
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+.nav__icon:hover {
+  background: var(--c-dark-brown);
+  opacity: 0.8;
+}
+.nav__icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+.nav__badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 2px;
+  border-radius: var(--radius-round);
+  background: var(--c-red);
+  color: var(--c-white);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+}
+
+/* ================================================================== *
+ * Hero
+ * ================================================================== */
+/* Full-viewport header. min-height (not height) so the content can still grow
+   past the fold on short screens instead of being clipped; dvh keeps it honest
+   against mobile browser chrome. The fixed nav overlaps, so it's padded out. */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: calc(var(--nav-h) + 24px);
+  padding-bottom: 48px;
+  background: var(--c-white);
+}
+/* The hero runs wider than the standard container — the design gives it 1408
+   of 1600, so the 48px headline gets the room it needs to hold 3 lines. */
+.hero__inner {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  max-width: 1360px;
+}
+.hero__text {
+  flex: 1 1 500px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+}
+.hero__ratings {
+  gap: 24px;
+}
+.rating-badges {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.rating-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 8px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-badge);
+}
+.rating-badge__icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.rating-badge__text {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  line-height: 1.2;
+}
+.rating-badge--dark {
+  background: var(--c-brown);
+  color: var(--c-white);
+}
+.rating-badge--light {
+  background: var(--c-white);
+  color: var(--c-text);
+}
+.rating-badge__stars {
+  color: #f2b71f;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.rating-badge--light .rating-badge__stars {
+  color: var(--c-text);
+  letter-spacing: normal;
+  font-weight: 400;
+}
+.rating-badge__stars-img {
+  height: 14px;
+  width: auto;
+  object-fit: contain;
+}
+.hero__title {
+  font-size: clamp(34px, 3.6vw, 48px);
+  line-height: 1;
+  color: var(--c-brown);
+}
+/* Keep each intended line on a single row (the design is a fixed 3-line
+   headline). */
+.hero__title .line-inner {
+  white-space: nowrap;
+}
+.hero__title .accent {
+  color: var(--c-red);
+}
+.hero__cta {
+  display: flex;
+  gap: 32px;
+}
+.hero__btn {
+  justify-content: center;
+  min-width: 240px;
+  height: 40px;
+  padding: 0 20px;
+}
+
+/* Right-hand showcase card: the caption sits inside the outlined card while
+   the illustration deliberately breaks out past its top-left edge, so the
+   cloud balloons float free of the border (as in the design). */
+.hero__showcase {
+  align-self: flex-end;
+  flex: 1 1 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.hero__slide {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  min-height: 216px;
+  padding: 32px;
+  border-radius: var(--radius-main);
+  border: 1px solid var(--c-light-grey);
+  background: var(--c-white);
+}
+/* The Figma header illustration (node 9607:51004) is drawn to deliberately
+   break out past the card's top/side edges — absolutely positioned so it
+   sits outside the flex flow the caption uses. */
+.hero__slide-art {
+  position: absolute;
+  top: -22%;
+  left: -7%;
+  width: 114%;
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+}
+/* The 4 reused "Who is it for" persona illustrations weren't drawn for that
+   overflow treatment — contain them in the card, laid out beside the
+   caption instead. */
+.hero__slide.is-contained {
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 620px;
+  max-width: 620px;
+  height: 400px;
+  max-height: 400px;
+  padding: 20px;
+}
+.hero__slide-art--contained {
+  position: static;
+  max-width: 55%;
+  max-height: 85%;
+  width: auto;
+  object-fit: contain;
+}
+.hero__slide-art--full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.hero__slide-art--full-80 {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 88%;
+  height: 88%;
+  max-width: 88%;
+  max-height: 88%;
+  object-fit: contain;
+}
+.hero__slide-art--full-90 {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 90%;
+  height: 90%;
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+.hero__slide-art--full-90-bottom {
+  position: absolute;
+  inset: 0;
+  margin: auto auto 0;
+  width: 90%;
+  height: 90%;
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  object-position: bottom;
+}
+.hero__slide-text {
+  position: relative;
+  width: 260px;
+  max-width: 100%;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--c-brown);
+}
+.hero__slide-text--bottom-right {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  max-width: 260px;
+}
+.hero__slide-text--bottom-right-offset {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: auto;
+  max-width: 260px;
+}
+.hero__slide-text--top-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+  max-width: 260px;
+}
+.hero__slide-text--top-right-offset {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: auto;
+  max-width: 260px;
+}
+.hero__slide-text--top-right-down {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  width: auto;
+  max-width: 260px;
+}
+.hero__slide-text--bottom-left {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  width: auto;
+  max-width: 260px;
+}
+.hero__slide-text--top-center {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: 260px;
+  text-align: center;
+}
+/* Slide switch points */
+.hero__dots {
+  display: flex;
+  gap: 8px;
+}
+.hero__dot {
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--c-light-grey);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.hero__dot:hover {
+  background: var(--c-grey);
+  transform: scale(1.15);
+}
+.hero__dot.is-active {
+  background: var(--c-brown);
+}
+
+/* ================================================================== *
+ * Companies / logo strip
+ * ================================================================== */
+.companies {
+  padding: 40px 0 72px;
+  text-align: center;
+}
+.companies__title {
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--c-brown);
+  margin-bottom: 28px;
+}
+.companies__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+.logo-card {
+  background: var(--c-white);
+  border-radius: 12px;
+  height: 80px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  padding: 0 16px;
+}
+/* Brand SVGs now carry their real dimensions. Constrain by BOTH max-height and
+   max-width (not a fixed height) so every logo keeps its true aspect ratio —
+   wide marks stay wide, the cards size to their content. */
+.logo-card img {
+  max-height: 30px;
+  max-width: 160px;
+  width: auto;
+  height: auto;
+}
+/* Compact marks read better a little larger. */
+.logo-card img[alt='Mastercard'] {
+  max-height: 42px;
+}
+.logo-card img[alt='Apple'] {
+  max-height: 40px;
+}
+.logo-card--cvs {
+  position: relative;
+}
+.logo-card--cvs .cvs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 15px;
+}
+/* Figma exports use preserveAspectRatio="none" + width:100%, so give the two
+   CVS parts explicit widths (derived from their viewBox aspect) to stop them
+   stretching to fill the flex row. */
+.logo-card--cvs .cvs img {
+  height: 15px;
+  flex: 0 0 auto;
+}
+.logo-card--cvs .cvs img[src*='cvs-a'] {
+  width: 58px;
+}
+.logo-card--cvs .cvs img[src*='cvs-b'] {
+  width: 61px;
+}
+.companies__pill {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 10px 20px;
+  border-radius: var(--radius-round);
+  border: 1px solid rgba(48, 34, 32, 0.15);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--c-brown);
+}
+
+/* ================================================================== *
+ * AI webinar banner
+ * ================================================================== */
+.ai-banner {
+  background: var(--c-brown);
+  color: var(--c-white);
+}
+.ai-banner__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 56px 24px;
+  max-width: var(--container);
+  margin-inline: auto;
+  flex-wrap: wrap;
+}
+.ai-banner__tag {
+  display: inline-block;
+  background: var(--c-red);
+  color: var(--c-white);
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+}
+.ai-banner__title {
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.15;
+  max-width: 460px;
+}
+.ai-banner__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+.ai-banner__date {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+/* ================================================================== *
+ * Product selector
+ * ================================================================== */
+/* Full-viewport section, same min-height (not height) approach as .hero so
+   content can still grow past the fold on short screens instead of clipping. */
+/* A fixed top offset (not align-items:center) on purpose: result screens
+   are much taller than question screens (the compare-products table adds a
+   lot of height below the card), so centering the section's full content
+   would shift the title/progress/card position on every step. A fixed
+   offset keeps them pinned to the same spot regardless of what's below. */
+.product {
+  position: relative;
+  z-index: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 140px 0 96px;
+  text-align: center;
+}
+.product > .container {
+  width: 100%;
+  max-width: 1360px;
+}
+.product__compare-btn {
+  margin-top: 40px;
+}
+.product__title {
+  font-size: 40px;
+  line-height: 1.05;
+  color: var(--c-brown);
+  margin-bottom: 24px;
+}
+.product__progress {
+  width: 320px;
+  max-width: 80%;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--c-light-grey);
+  margin: 0 auto 56px;
+  position: relative;
+}
+.product__progress::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-red);
+}
+
+/* ================================================================== *
+ * How it works
+ * ================================================================== */
+.how-it-works {
+  padding: 72px 0;
+  background: var(--c-beige);
+}
+
+.hiw-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.hiw-card {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  padding: 60px 90px;
+  border-radius: var(--radius-main);
+  background: var(--c-white);
+  box-shadow: var(--shadow-badge);
+}
+.hiw-card__icon {
+  flex-shrink: 0;
+  width: 400px;
+  display: grid;
+  place-items: center;
+}
+.hiw-card__icon img {
+  width: 100%;
+  height: auto;
+}
+.hiw-card__title {
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--c-brown);
+  margin-bottom: 10px;
+}
+.hiw-card__text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--c-brown);
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+.hiw-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Sticky-pinned card stack (motherduck.com "data warehouse + AI" treatment):
+   JS pins .hiw-stack__viewport and crossfades the cards over it while
+   scrolling, adding .is-stacked once it takes over from the static grid. */
+.hiw-stack {
+  position: relative;
+  padding: 64px 24px;
+}
+.hiw-stack__viewport {
+  position: relative;
+}
+.hiw-stack.is-stacked .hiw-cards {
+  display: block;
+  padding: 0;
+}
+.hiw-stack.is-stacked .hiw-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+}
+
+/* ================================================================== *
+ * Who is it for
+ * ================================================================== */
+.roles {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 96px 0 120px;
+  background: var(--c-white);
+  overflow: hidden;
+}
+.roles__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  margin-bottom: 64px;
+}
+.tag-pill {
+  display: inline-block;
+  background: var(--c-brown);
+  color: var(--c-white);
+  font-weight: 900;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: var(--radius-small);
+}
+.roles__title {
+  font-size: 36px;
+  color: var(--c-brown);
+}
+/* Anchored to .roles__cards (not the section) and positioned at the pin's
+   own vertical center (half the pin's height), so it always lines up with
+   the pins regardless of header size/wrapping — no magic offsets. */
+.roles__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 12px;
+  height: 1px;
+  background-image: linear-gradient(90deg, var(--c-grey) 50%, transparent 50%);
+  background-size: 8px 1px;
+  opacity: 0.5;
+}
+/* Fanned "deck of cards" — fixed-width cards overlap via negative margin;
+   later cards paint on top of earlier ones (normal DOM stacking order). */
+.roles__cards {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.role-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 270px;
+  width: 270px;
+  margin-left: -34px;
+  transform: rotate(var(--rot, 0deg));
+}
+.role-card:first-child {
+  margin-left: 0;
+}
+.role-card__pin {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--c-white);
+  border: 4px solid var(--c-grey);
+  margin-bottom: -16px;
+  z-index: 1;
+}
+.role-card__panel {
+  width: 100%;
+  min-height: 280px;
+  background: var(--c-white);
+  border: 1px solid var(--c-light-grey);
+  border-radius: var(--radius-main);
+  box-shadow: var(--shadow-badge);
+  padding: 20px 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+.role-card__illustration {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.role-card__illustration img {
+  max-width: 92%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.role-card__panel h3 {
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--c-brown);
+}
+.role-card__panel p {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--c-brown);
+  opacity: 0.85;
+}
+
+/* ================================================================== *
+ * Use cases
+ * ================================================================== */
+.usecases {
+  padding: 72px 0;
+  background: var(--c-white);
+}
+.usecases__card {
+  background: var(--c-brown);
+  border-radius: var(--radius-main);
+  padding: 56px 64px;
+}
+.usecases__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.tag-pill--red {
+  background: var(--c-red);
+}
+.usecases__controls {
+  display: flex;
+  gap: 16px;
+}
+.usecases__arrow {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  border: 1px solid var(--c-white);
+  display: grid;
+  place-items: center;
+  opacity: 0.4;
+  cursor: not-allowed;
+  transition: opacity 0.2s ease;
+}
+.usecases__arrow:not(:disabled) {
+  opacity: 1;
+  cursor: pointer;
+}
+.usecases__arrow:not(:disabled):hover {
+  opacity: 0.8;
+}
+.usecases__arrow img {
+  width: 10px;
+  height: auto;
+}
+.usecases__arrow--next img {
+  transform: scaleX(-1);
+}
+
+.usecases__body {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+.usecases__text {
+  flex: 1 1 460px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+.usecases__title {
+  font-size: 36px;
+  color: var(--c-white);
+}
+.usecases__text p {
+  font-size: 16px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+}
+.btn--white {
+  background: var(--c-white);
+  color: var(--c-brown);
+  border: 1px solid var(--c-brown);
+}
+.usecases__illustration {
+  position: relative;
+  flex: 0 0 510px;
+  width: 510px;
+  height: 510px;
+  display: grid;
+  place-items: center;
+}
+.usecases__illustration img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ================================================================== *
+ * Ecosystem
+ * ================================================================== */
+.ecosystem {
+  position: relative;
+  padding: 60px 24px 96px;
+  text-align: center;
+  overflow: hidden;
+}
+.ecosystem__title {
+  font-size: 36px;
+  color: var(--c-brown);
+  margin-bottom: 120px;
+}
+
+.eco-cards {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.eco-cards::before {
+  content: '';
+  position: absolute;
+  inset: 60px -20% 0;
+  z-index: 3;
+  background: linear-gradient(to bottom, transparent 0%, #ffffff 65%);
+  pointer-events: none;
+}
+.eco-card {
+  position: relative;
+  top: -75px;
+  flex: 0 0 200px;
+  width: 200px;
+  margin-left: -40px;
+}
+.eco-card:first-child {
+  margin-left: 0;
+}
+.eco-card:nth-child(3) {
+  z-index: 2;
+  top: -90px;
+}
+.eco-card:first-child,
+.eco-card:last-child {
+  top: -50px;
+}
+.eco-card__panel {
+  aspect-ratio: 1 / 1;
+  background: var(--c-white);
+  border-radius: var(--radius-main);
+  box-shadow: var(--shadow-badge);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.eco-card__panel h3 {
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--c-brown);
+}
+.eco-card__logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+}
+.eco-card__logos img {
+  height: 26px;
+  width: auto;
+}
+.eco-card__logos--ai {
+  gap: 8px 10px;
+}
+.eco-icon-sm {
+  height: 16px !important;
+}
+.eco-text-sm {
+  height: 11px !important;
+}
+.gemini-logo {
+  position: relative;
+  width: 60px;
+  height: 13.542px;
+}
+.gemini-logo img {
+  position: absolute;
+  height: auto !important;
+}
+.eco-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ecosystem__wordmark-wrap {
+  margin: 20px 0 32px;
+}
+.ecosystem__wordmark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(32px, 8.5vw, 120px);
+  letter-spacing: -0.03em;
+  color: var(--c-brown);
+  line-height: 1.2;
+}
+.ecosystem__mark {
+  position: relative;
+  top: calc(0.05em + 10px);
+  width: clamp(24px, 5.4vw, 70px);
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 50%;
+  margin: 0 clamp(2px, 0.6vw, 8px);
+}
+
+/* ================================================================== *
+ * Testimonials
+ * ================================================================== */
+.testimonials {
+  padding: 72px 0 96px;
+  background: var(--c-white);
+}
+.testimonials__header {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+.testimonials__title {
+  font-size: 36px;
+  color: var(--c-brown);
+}
+.testimonials__top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.testimonials__controls {
+  display: flex;
+  gap: 16px;
+}
+.testimonials__arrow {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  border: 1px solid var(--c-grey);
+  display: grid;
+  place-items: center;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+.testimonials__arrow:hover {
+  border-color: var(--c-brown);
+  opacity: 0.8;
+}
+.testimonials__arrow img {
+  width: 10px;
+  height: auto;
+}
+.testimonials__arrow--next img {
+  transform: scaleX(-1);
+}
+
+.testimonials__social {
+  display: flex;
+  gap: 24px;
+}
+.testimonials__social img {
+  width: 30px;
+  height: 30px;
+}
+
+.testimonials__track {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 24px;
+  padding: 4px 24px 24px 24px;
+  scrollbar-width: none;
+}
+.testimonials__track::-webkit-scrollbar {
+  display: none;
+}
+.testimonial-card {
+  scroll-snap-align: start;
+  flex: 0 0 420px;
+  width: 420px;
+  background: var(--c-light-grey);
+  border: 1px solid var(--c-grey);
+  border-radius: var(--radius-main);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.testimonial-card__top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.testimonial-card__avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.testimonial-card__person {
+  flex: 1;
+  min-width: 0;
+}
+.testimonial-card__name {
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--c-brown);
+}
+.testimonial-card__role {
+  font-size: 15px;
+  color: var(--c-brown);
+  opacity: 0.8;
+}
+.testimonial-card__logo {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--c-dark-beige);
+  border-radius: var(--radius-small);
+  display: grid;
+  place-items: center;
+}
+.testimonial-card__logo img {
+  width: 24px;
+  height: 24px;
+}
+.testimonial-card__quote {
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--c-brown);
+}
+.testimonial-card__body {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--c-brown);
+  opacity: 0.85;
+}
+
+/* ================================================================== *
+ * Newsletter
+ * ================================================================== */
+.newsletter {
+  padding: 160px 0 160px;
+}
+/* Wraps the card + the beaver mascot, which peeks out above the card's top
+   edge — needs its own (non-clipping) stacking context, separate from the
+   card's own overflow:hidden (used to crop the background pattern). */
+.newsletter__wrap {
+  position: relative;
+}
+.newsletter__card {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  background: var(--c-brown);
+  border-radius: var(--radius-main);
+  padding: 64px;
+  overflow: hidden;
+}
+/* In the source design the card sits narrower than its wrapper, so the
+   beaver hangs mostly outside the card's left edge with just its paw
+   resting on the corner. Our card fills the full container width (no
+   spare margin to hang into), so instead it's sized down and tucked into
+   the top-left corner, small enough that it clears the vertically
+   centered heading below it. */
+.newsletter__beaver {
+  position: absolute;
+  top: calc(220px * -0.325);
+  left: -72px;
+  width: 220px;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+.newsletter__pattern {
+  position: absolute;
+  top: -66%;
+  left: -30%;
+  width: 70%;
+  height: auto;
+  opacity: 1;
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+.newsletter__intro {
+  position: relative;
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  color: var(--c-white);
+}
+.newsletter__title {
+  font-size: 36px;
+}
+.newsletter__sub {
+  font-weight: 900;
+  font-size: 20px;
+}
+.newsletter__form {
+  position: relative;
+  flex: 1 1 420px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.newsletter__field {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.newsletter__field label {
+  color: var(--c-white);
+  font-size: 16px;
+}
+.newsletter__field input {
+  height: 40px;
+  border-radius: var(--radius-small);
+  border: 1px solid var(--c-grey);
+  background: var(--c-white);
+  padding: 0 14px;
+  font-size: 15px;
+  font-family: var(--font-body);
+}
+.newsletter__checks {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.newsletter__check {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  color: var(--c-white);
+  font-size: 16px;
+  cursor: pointer;
+}
+.newsletter__check input {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: var(--radius-small);
+  border: 1px solid var(--c-grey);
+  accent-color: var(--c-red);
+}
+.newsletter__submit {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ================================================================== *
+ * Footer — sticky-pin reveal
+ * ================================================================== *
+ * .footer-reveal reserves the footer's real height in document flow.
+ * Inside it, .footer-reveal__runway is pulled up by one viewport height
+ * (top: -100vh) and made that much taller, giving .footer-reveal__sticky
+ * a full viewport's worth of scroll distance to stay pinned to the
+ * bottom of the screen before releasing into normal flow — the page
+ * content above appears to scroll away and "reveal" the footer sitting
+ * underneath. Inert until JS measures the footer's natural height and
+ * adds .is-ready (see src/animations/footerReveal.js); until then it's
+ * a plain static footer, so nothing breaks without JS.
+ * ================================================================== */
+.footer-reveal {
+  position: relative;
+  z-index: 1;
+}
+.footer-reveal__runway {
+  position: relative;
+}
+.footer-reveal__sticky {
+  position: relative;
+}
+.footer-reveal.is-ready {
+  height: var(--footer-h);
+}
+.footer-reveal.is-ready .footer-reveal__runway {
+  top: -100vh;
+  height: calc(var(--footer-h) + 100vh);
+}
+.footer-reveal.is-ready .footer-reveal__sticky {
+  position: sticky;
+  top: calc(100vh - var(--footer-h));
+  height: var(--footer-h);
+}
+
+.site-footer {
+  background: var(--c-brown);
+  padding: 64px 0;
+}
+.site-footer__cols {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+.site-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 190px;
+}
+.site-footer__heading {
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--c-white);
+  margin-bottom: 16px;
+}
+.site-footer__col a {
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.2s ease;
+}
+.site-footer__col a:hover {
+  color: var(--c-white);
+}
+.site-footer__divider {
+  height: 1px;
+  background: var(--c-grey);
+  margin-bottom: 32px;
+}
+.site-footer__bottom {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.site-footer__logo {
+  width: 120px;
+  height: auto;
+}
+.site-footer__bottom-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+}
+.site-footer__social {
+  display: flex;
+  gap: 24px;
+}
+.site-footer__social img {
+  width: 30px;
+  height: 30px;
+}
+.site-footer__rights {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-white);
+}
+
+/* ================================================================== *
+ * Reveal state (JS toggles .is-in) — hidden until animated in.
+ * If JS is disabled the .no-js fallback keeps content visible.
+ * ================================================================== */
+[data-reveal] {
+  opacity: 0;
+}
+.no-js [data-reveal] {
+  opacity: 1;
+}
+
+/* ================================================================== *
+ * Responsive
+ * ================================================================== */
+@media (max-width: 900px) {
+  .nav__links {
+    display: none;
+  }
+  .hero__card {
+    width: min(430px, 100%);
+  }
+  .hero__diagram {
+    opacity: 0.5;
+  }
+  .hiw-cards {
+    grid-template-columns: 1fr;
+  }
+  .roles__cards {
+    flex-wrap: wrap;
+    row-gap: 48px;
+  }
+  .role-card {
+    margin-left: -34px;
+  }
+  .role-card:nth-child(odd) {
+    margin-left: 0;
+  }
+  .roles__line {
+    top: 50%;
+    display: none;
+  }
+  .usecases__card {
+    padding: 40px;
+  }
+  .usecases__body {
+    flex-direction: column-reverse;
+    gap: 32px;
+  }
+  .usecases__text {
+    flex-basis: auto;
+    align-items: center;
+    text-align: center;
+  }
+  .eco-cards {
+    flex-wrap: wrap;
+    row-gap: 24px;
+  }
+  .eco-card {
+    margin-left: -30px;
+  }
+  .eco-card:nth-child(odd) {
+    margin-left: 0;
+  }
+  .testimonials__top-row {
+    justify-content: flex-start;
+  }
+  .testimonial-card {
+    flex-basis: 360px;
+    width: 360px;
+  }
+  .newsletter__card {
+    padding: 48px 40px;
+  }
+  .site-footer__col {
+    width: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-bottom: 40px;
+  }
+  .hero__inner {
+    min-height: auto;
+    padding-top: 40px;
+  }
+  .hero__title {
+    font-size: 30px;
+  }
+  /* On narrow screens let the headline wrap rather than shrink to fit. */
+  .hero__title .line-inner {
+    white-space: normal;
+  }
+  .ai-banner__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ai-banner__title {
+    font-size: 26px;
+  }
+  .product__title {
+    font-size: 30px;
+  }
+  .hiw-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 32px 24px;
+  }
+  .roles__cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .role-card {
+    margin-left: 0 !important;
+  }
+  .roles__title {
+    font-size: 28px;
+  }
+  .usecases__card {
+    padding: 32px 24px;
+  }
+  .usecases__title {
+    font-size: 28px;
+  }
+  .usecases__illustration {
+    flex-basis: 260px;
+    width: 260px;
+    height: 260px;
+  }
+  .ecosystem__title {
+    font-size: 28px;
+  }
+  .eco-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .eco-card {
+    margin-left: 0 !important;
+  }
+  .testimonials__title {
+    font-size: 28px;
+  }
+  .testimonial-card {
+    flex-basis: 300px;
+    width: 300px;
+    padding: 28px;
+  }
+  .newsletter__card {
+    flex-direction: column;
+    padding: 88px 24px 40px;
+  }
+  .newsletter__title {
+    font-size: 28px;
+  }
+  .newsletter__pattern {
+    width: 90%;
+    top: -6%;
+    left: -20%;
+  }
+  .newsletter__beaver {
+    width: 120px;
+    top: -39px;
+  }
+  .site-footer__cols {
+    gap: 32px;
+  }
+  .site-footer__col {
+    width: 45%;
+  }
+  .site-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .site-footer__bottom-right {
+    align-items: flex-start;
+    width: 100%;
+  }
+}

@@ -19,7 +19,8 @@ const SLIDES = [
     contain: true,
     textPosition: 'bottom-right-offset',
     artWidth: 'full',
-    offsetY: -60,
+    offsetY: -40,
+    textOffsetY: -20,
   },
   {
     label: 'Developer',
@@ -29,6 +30,8 @@ const SLIDES = [
     contain: true,
     textPosition: 'top-right-offset',
     artWidth: 'full-80',
+    textOffsetX: -20,
+    textOffsetY: 20,
   },
   {
     label: 'Data engineer',
@@ -38,6 +41,8 @@ const SLIDES = [
     contain: true,
     textPosition: 'top-right-down',
     artWidth: 'full-90-bottom',
+    textOffsetX: -20,
+    textOffsetY: 20,
   },
   {
     label: 'DBA',
@@ -47,7 +52,8 @@ const SLIDES = [
     contain: true,
     textPosition: 'top-center',
     artWidth: 'full-90',
-    offsetY: 20,
+    offsetY: 40,
+    textOffsetY: 20,
   },
   {
     label: 'Analyst',
@@ -57,8 +63,10 @@ const SLIDES = [
     contain: true,
     textPosition: 'bottom-left',
     artWidth: 'full',
-    offsetY: -40,
+    offsetY: -10,
     scale: 1.1,
+    textOffsetX: 20,
+    textOffsetY: -20,
   },
 ];
 
@@ -95,6 +103,21 @@ export function initHeroSlides({ prefersReducedMotion }) {
       transforms.push(`translateY(${offsetY}px)`);
     }
     art.style.transform = transforms.length ? transforms.join(' ') : '';
+  }
+
+  // Per-slide nudge on top of whatever corner the textPosition class parks
+  // the caption in. `top-center` centres itself with translateX(-50%), so
+  // that has to be folded into the inline transform or the caption jumps
+  // right by half its width the moment an offset is applied.
+  function applyTextOffset(offsetX, offsetY, textPosition) {
+    const x = offsetX || 0;
+    const y = offsetY || 0;
+    if (!x && !y) {
+      caption.style.transform = '';
+      return;
+    }
+    const tx = textPosition === 'top-center' ? `calc(-50% + ${x}px)` : `${x}px`;
+    caption.style.transform = `translate(${tx}, ${y}px)`;
   }
 
   function applyTextPosition(textPosition) {
@@ -138,6 +161,7 @@ export function initHeroSlides({ prefersReducedMotion }) {
       applyArtWidth(data.artWidth);
       applyArtOffset(data.offsetY, data.scale);
       applyTextPosition(data.textPosition);
+      applyTextOffset(data.textOffsetX, data.textOffsetY, data.textPosition);
       index = next;
       syncDots();
     };
@@ -227,6 +251,7 @@ export function initHeroSlides({ prefersReducedMotion }) {
   applyArtWidth(SLIDES[0].artWidth);
   applyArtOffset(SLIDES[0].offsetY, SLIDES[0].scale);
   applyTextPosition(SLIDES[0].textPosition);
+  applyTextOffset(SLIDES[0].textOffsetX, SLIDES[0].textOffsetY, SLIDES[0].textPosition);
 
   syncDots();
   startAutoplay();

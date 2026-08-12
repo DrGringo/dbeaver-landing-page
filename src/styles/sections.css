@@ -406,7 +406,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: auto;
-  max-width: 260px;
+  max-width: 280px;
   text-align: center;
 }
 /* Slide switch points */
@@ -847,7 +847,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
 }
 .tag-pill--red {
   background: var(--c-red);
@@ -885,7 +885,7 @@
 .usecases__body {
   display: flex;
   align-items: center;
-  gap: 64px;
+  gap: 100px;
 }
 .usecases__text {
   flex: 1 1 460px;
@@ -917,9 +917,9 @@
 }
 .usecases__illustration {
   position: relative;
-  flex: 0 0 510px;
-  width: 510px;
-  height: 510px;
+  flex: 0 0 460px;
+  width: 460px;
+  height: 460px;
   display: grid;
   place-items: center;
 }
@@ -1205,7 +1205,7 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  gap: 48px;
+  gap: 64px;
   background: var(--c-brown);
   border-radius: var(--radius-main);
   padding: 64px;
@@ -1247,10 +1247,6 @@
 }
 .newsletter__title {
   font-size: 36px;
-}
-.newsletter__sub {
-  font-weight: 900;
-  font-size: 20px;
 }
 .newsletter__form {
   position: relative;

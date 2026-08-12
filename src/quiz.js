@@ -142,6 +142,25 @@ const COMPARE = {
       Development: ['Entity Relationship Diagrams'],
     },
   },
+  dbeaverCommunity: {
+    label: 'DBeaver Community',
+    price: '0',
+    features: {
+      Connectivity: ['SQL database support'],
+      'Data & SQL Management': ['SQL Editor & Query History', 'Data Editor', '@ai command'],
+      Development: ['Entity Relationship Diagrams', 'Sync projects to the Git repository (plugin)'],
+      'Administration & Security': ['Task management', 'Data migration'],
+    },
+  },
+  cloudbeaverCommunity: {
+    label: 'CloudBeaver Community',
+    price: '0',
+    features: {
+      Connectivity: ['SQL database support'],
+      'Data & SQL Management': ['SQL Editor & Query History', 'Data Editor'],
+      Collaboration: ['Data collaboration in real time', 'Shared scripts and database connections'],
+    },
+  },
   cloudbeaverEnterprise: {
     label: 'CloudBeaver Enterprise',
     price: '1,025',
@@ -165,6 +184,21 @@ const COMPARE = {
     },
   },
 };
+
+// Order the compare dropdowns list products in — mirrors the column order in
+// the Figma comparison table (node 9096:4455): DBeaver family, then
+// CloudBeaver, then dbvr, each running community -> paid tiers.
+const COMPARE_ORDER = [
+  'dbeaverCommunity',
+  'lite',
+  'enterprise',
+  'ultimate',
+  'teamEdition',
+  'cloudbeaverCommunity',
+  'cloudbeaverEnterprise',
+  'dbvr',
+  'dbvrCommunity',
+];
 
 const RESULTS = {
   dbvr: {
@@ -222,6 +256,30 @@ export function initQuiz() {
   // two competing links to the same page. Driven off whichever step is
   // actually mounted rather than a counter, so Back restores it correctly.
   const compareBtn = document.querySelector('.product__compare-btn');
+
+  // Registered once here rather than per result render — renderResult can run
+  // many times as the user walks back and forth, and per-render document
+  // listeners would pile up.
+  function closeCompareMenus() {
+    root.querySelectorAll('.quiz-compare__menu.is-open').forEach((menu) => {
+      menu.classList.remove('is-open');
+      menu.previousElementSibling?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    // The toggle button manages its own open/close in the delegated handler.
+    if (e.target.closest('[data-compare-toggle]')) return;
+    closeCompareMenus();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const open = root.querySelector('.quiz-compare__menu.is-open');
+    if (!open) return;
+    open.previousElementSibling?.focus();
+    closeCompareMenus();
+  });
 
   function syncCompareBtn() {
     if (!compareBtn) return;
@@ -326,7 +384,10 @@ export function initQuiz() {
     return el;
   }
 
-  function compareColumn(key) {
+  // One column of the comparison. `otherKey` is whatever the *other* column is
+  // showing — that option gets disabled so the two columns can't collapse onto
+  // the same product, which would make the comparison meaningless.
+  function compareColumn(key, colIndex, otherKey) {
     const data = COMPARE[key];
     const categories = Object.entries(data.features)
       .map(
@@ -338,11 +399,39 @@ export function initQuiz() {
       `
       )
       .join('');
+
+    const options = COMPARE_ORDER.map((k) => {
+      const isCurrent = k === key;
+      const isTaken = k === otherKey;
+      return `
+        <li role="none">
+          <button
+            class="quiz-compare__option${isCurrent ? ' is-selected' : ''}"
+            type="button"
+            role="option"
+            aria-selected="${isCurrent}"
+            data-compare-pick="${k}"
+            ${isTaken ? 'disabled' : ''}
+          >${COMPARE[k].label}</button>
+        </li>
+      `;
+    }).join('');
+
     return `
       <div class="quiz-compare__col">
-        <div class="quiz-compare__select">
-          <span>${data.label}</span>
-          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 6 5-6" stroke="#302220" stroke-width="1.5"/></svg>
+        <div class="quiz-compare__select-wrap">
+          <button
+            class="quiz-compare__select"
+            type="button"
+            data-compare-toggle
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-label="Change product in column ${colIndex + 1}, currently ${data.label}"
+          >
+            <span>${data.label}</span>
+            <svg viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1l5 6 5-6" stroke="#302220" stroke-width="1.5"/></svg>
+          </button>
+          <ul class="quiz-compare__menu" role="listbox" aria-label="Products">${options}</ul>
         </div>
         <div class="quiz-compare__pricing">
           <p class="quiz-compare__pricing-label">Pricing</p>
@@ -360,6 +449,10 @@ export function initQuiz() {
     const result = RESULTS[key];
     const el = document.createElement('div');
     el.className = 'quiz-result';
+
+    // Columns start on the quiz's recommendation and its natural counterpart;
+    // each dropdown then swaps its own column independently.
+    const compareKeys = [key, result.vs];
     el.innerHTML = `
       ${progressBar(FILL_STEPS.length - 1, true)}
       <div class="quiz-grid-row">
@@ -376,13 +469,42 @@ export function initQuiz() {
       </div>
       <div class="quiz-compare">
         <p class="quiz-compare__title display">Compare products</p>
-        <div class="quiz-compare__cols">
-          ${compareColumn(key)}
-          ${compareColumn(result.vs)}
-        </div>
+        <div class="quiz-compare__cols" data-compare-cols></div>
         <a class="quiz-detailed" href="https://dbeaver.com/edition/" target="_blank" rel="noopener">Detailed comparison page</a>
       </div>
     `;
+
+    const cols = el.querySelector('[data-compare-cols]');
+
+    function renderCols() {
+      cols.innerHTML =
+        compareColumn(compareKeys[0], 0, compareKeys[1]) +
+        compareColumn(compareKeys[1], 1, compareKeys[0]);
+    }
+    renderCols();
+
+    // Delegated from the stable .quiz-compare__cols wrapper so the handlers
+    // survive renderCols() swapping out both columns on every pick.
+    cols.addEventListener('click', (e) => {
+      const toggle = e.target.closest('[data-compare-toggle]');
+      if (toggle) {
+        const menu = toggle.nextElementSibling;
+        const willOpen = !menu.classList.contains('is-open');
+        closeCompareMenus();
+        menu.classList.toggle('is-open', willOpen);
+        toggle.setAttribute('aria-expanded', String(willOpen));
+        return;
+      }
+
+      const pick = e.target.closest('[data-compare-pick]');
+      if (!pick || pick.disabled) return;
+      const col = pick.closest('.quiz-compare__col');
+      const colIndex = [...cols.children].indexOf(col);
+      if (colIndex === -1) return;
+      compareKeys[colIndex] = pick.dataset.comparePick;
+      renderCols();
+    });
+
     el.querySelector('[data-back]').addEventListener('click', () => {
       const prev = history.pop();
       swapTo(renderStep(prev), -1);

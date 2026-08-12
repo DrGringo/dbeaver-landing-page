@@ -934,7 +934,7 @@
  * ================================================================== */
 .ecosystem {
   position: relative;
-  padding: 60px 24px 96px;
+  padding: 140px 24px 96px;
   text-align: center;
   overflow: hidden;
 }
@@ -1056,7 +1056,7 @@
  * Testimonials
  * ================================================================== */
 .testimonials {
-  padding: 72px 0 96px;
+  padding: 150px 0 96px;
   background: var(--c-white);
 }
 .testimonials__header {

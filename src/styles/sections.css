@@ -581,6 +581,12 @@
 .product__compare-btn {
   margin-top: 40px;
 }
+/* Shown on the quiz's opening screen only (see syncCompareBtn in quiz.js).
+   Needs the doubled selector to outrank .btn's own `display: inline-flex` —
+   the plain [hidden] attribute loses that specificity fight. */
+.product__compare-btn.is-hidden {
+  display: none;
+}
 .product__title {
   font-size: 40px;
   line-height: 1.05;

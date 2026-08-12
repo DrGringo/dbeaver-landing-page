@@ -216,6 +216,19 @@ export function initQuiz() {
   let history = [];
   let gridScrollTrigger = null;
 
+  // The section's static "See detailed comparison" button only belongs on the
+  // opening screen — every later step is mid-decision, and the result screen
+  // ships its own "Detailed comparison page" link, so keeping it would show
+  // two competing links to the same page. Driven off whichever step is
+  // actually mounted rather than a counter, so Back restores it correctly.
+  const compareBtn = document.querySelector('.product__compare-btn');
+
+  function syncCompareBtn() {
+    if (!compareBtn) return;
+    const onFirstScreen = root.firstElementChild?.dataset.quizFirst !== undefined;
+    compareBtn.classList.toggle('is-hidden', !onFirstScreen);
+  }
+
   // Reveal the decorative badges in random order as the first screen's grid
   // scrolls into view (ScrollTrigger's stagger `from: "random"`), instead of
   // just being present on load. Deferred a frame so the trigger element is
@@ -265,6 +278,7 @@ export function initQuiz() {
     const isFirstScreen = nodeKey === ROOT && history.length === 0;
     const el = document.createElement('div');
     el.className = 'quiz-step';
+    if (isFirstScreen) el.dataset.quizFirst = '';
 
     const card = `
       <div class="quiz-card">
@@ -386,6 +400,7 @@ export function initQuiz() {
   function swapTo(nextEl, direction) {
     if (prefersReducedMotion) {
       root.replaceChildren(nextEl);
+      syncCompareBtn();
       return;
     }
     const current = root.firstElementChild;
@@ -395,9 +410,26 @@ export function initQuiz() {
     }
     const nextBody = stepBody(nextEl);
     tl.set(nextBody, { opacity: 0, y: 12 * direction });
-    tl.add(() => root.replaceChildren(nextEl));
+    tl.add(() => {
+      root.replaceChildren(nextEl);
+      syncCompareBtn();
+    });
     tl.to(nextBody, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out', clearProps: 'opacity' });
   }
 
   root.replaceChildren(renderStep(ROOT));
+  syncCompareBtn();
+
+  // Swapping steps changes this section's height — the result screen adds the
+  // whole "Compare products" block (~1500px) — which pushes every later
+  // section down. ScrollTrigger resolves its start/end to absolute pixel
+  // offsets once and caches them, so without a refresh the How it works pin
+  // still fires at the old offset and lands its card on top of the quiz.
+  // rAF-debounced: refresh() recalculates every trigger, and ResizeObserver
+  // fires on first observation and repeatedly during the crossfade.
+  let refreshRaf;
+  new ResizeObserver(() => {
+    cancelAnimationFrame(refreshRaf);
+    refreshRaf = requestAnimationFrame(() => ScrollTrigger.refresh());
+  }).observe(root);
 }

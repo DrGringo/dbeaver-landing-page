@@ -135,11 +135,12 @@ const COMPARE = {
   },
   lite: {
     label: 'DBeaver Lite',
-    price: '0',
+    price: '113',
     features: {
-      Connectivity: ['SQL database support'],
-      'Data & SQL Management': ['SQL Editor & Query History', 'Visual Query Builder', 'Data Editor'],
+      Connectivity: ['SQL database support', 'NoSQL/BigData database support'],
+      'Data & SQL Management': ['SQL Editor & Query History', 'Visual Query Builder', 'Data Editor', 'AI assistant (OpenAI, GitHub Copilot, Gemini, Ollama, Azure, Bedrock, Claude)', '@ai command'],
       Development: ['Entity Relationship Diagrams'],
+      'Administration & Security': ['Advanced security'],
     },
   },
   dbeaverCommunity: {
@@ -185,19 +186,17 @@ const COMPARE = {
   },
 };
 
-// Order the compare dropdowns list products in — mirrors the column order in
-// the Figma comparison table (node 9096:4455): DBeaver family, then
-// CloudBeaver, then dbvr, each running community -> paid tiers.
-const COMPARE_ORDER = [
-  'dbeaverCommunity',
-  'lite',
-  'enterprise',
-  'ultimate',
-  'teamEdition',
-  'cloudbeaverCommunity',
-  'cloudbeaverEnterprise',
-  'dbvr',
-  'dbvrCommunity',
+// Canonical category order. Both compare columns place a given category on
+// the same grid row (see .quiz-compare__cols), so "Connectivity" in one column
+// lines up with "Connectivity" in the other even when the two products have
+// different numbers of features — matching the Figma result screens, where
+// both columns share identical category y positions (e.g. node 9665:13863).
+const CATEGORY_ORDER = [
+  'Connectivity',
+  'Data & SQL Management',
+  'Collaboration',
+  'Development',
+  'Administration & Security',
 ];
 
 const RESULTS = {
@@ -217,7 +216,7 @@ const RESULTS = {
     name: 'DBeaver Enterprise',
     description: 'Adds enterprise-grade security, task management, and governance on top of the full admin and development toolset, so your DBAs can operate with confidence at scale.',
     url: 'https://dbeaver.com/dbeaver-enterprise/',
-    vs: 'ultimate',
+    vs: 'lite',
   },
   lite: {
     name: 'DBeaver Lite',
@@ -249,6 +248,12 @@ export function initQuiz() {
 
   let history = [];
   let gridScrollTrigger = null;
+  // True while a step crossfade is in flight. Handlers pop `history` before
+  // calling swapTo, so a second click landing mid-transition would pop twice
+  // and hand renderStep an undefined key — TREE[undefined].question throws.
+  // The result screen always shows Back, which makes a double-click there the
+  // easiest way to hit it.
+  let swapping = false;
 
   // The section's static "See detailed comparison" button only belongs on the
   // opening screen — every later step is mid-decision, and the result screen
@@ -256,30 +261,6 @@ export function initQuiz() {
   // two competing links to the same page. Driven off whichever step is
   // actually mounted rather than a counter, so Back restores it correctly.
   const compareBtn = document.querySelector('.product__compare-btn');
-
-  // Registered once here rather than per result render — renderResult can run
-  // many times as the user walks back and forth, and per-render document
-  // listeners would pile up.
-  function closeCompareMenus() {
-    root.querySelectorAll('.quiz-compare__menu.is-open').forEach((menu) => {
-      menu.classList.remove('is-open');
-      menu.previousElementSibling?.setAttribute('aria-expanded', 'false');
-    });
-  }
-
-  document.addEventListener('click', (e) => {
-    // The toggle button manages its own open/close in the delegated handler.
-    if (e.target.closest('[data-compare-toggle]')) return;
-    closeCompareMenus();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    const open = root.querySelector('.quiz-compare__menu.is-open');
-    if (!open) return;
-    open.previousElementSibling?.focus();
-    closeCompareMenus();
-  });
 
   function syncCompareBtn() {
     if (!compareBtn) return;
@@ -359,6 +340,7 @@ export function initQuiz() {
 
     el.querySelectorAll('[data-answer]').forEach((btn) => {
       btn.addEventListener('click', () => {
+        if (swapping) return;
         const next = node[btn.dataset.answer];
         history.push(nodeKey);
         if (TREE[next]) {
@@ -372,6 +354,7 @@ export function initQuiz() {
     const backBtn = el.querySelector('[data-back]');
     if (backBtn) {
       backBtn.addEventListener('click', () => {
+        if (swapping || !history.length) return;
         const prev = history.pop();
         swapTo(renderStep(prev), -1);
       });
@@ -384,60 +367,32 @@ export function initQuiz() {
     return el;
   }
 
-  // One column of the comparison. `otherKey` is whatever the *other* column is
-  // showing — that option gets disabled so the two columns can't collapse onto
-  // the same product, which would make the comparison meaningless.
-  function compareColumn(key, colIndex, otherKey) {
+  // One column of the comparison. Header is the product name on the left and
+  // its price on the right (Figma "Frame 1250", e.g. node 9665:13534).
+  function compareColumn(key) {
     const data = COMPARE[key];
+    // `--row` drives grid-row so both columns share a row per category. Row 1
+    // is the name/price header, so categories start at 2. Anything not in
+    // CATEGORY_ORDER still renders, parked after the known rows.
     const categories = Object.entries(data.features)
-      .map(
-        ([cat, items]) => `
-        <div class="quiz-compare__group">
+      .map(([cat, items]) => {
+        const idx = CATEGORY_ORDER.indexOf(cat);
+        const row = (idx === -1 ? CATEGORY_ORDER.length : idx) + 2;
+        return `
+        <div class="quiz-compare__group" style="--row: ${row}">
           <p class="quiz-compare__cat">${cat}</p>
           <div class="quiz-compare__list">${items.map((f) => `<p>${f}</p>`).join('')}</div>
         </div>
-      `
-      )
-      .join('');
-
-    const options = COMPARE_ORDER.map((k) => {
-      const isCurrent = k === key;
-      const isTaken = k === otherKey;
-      return `
-        <li role="none">
-          <button
-            class="quiz-compare__option${isCurrent ? ' is-selected' : ''}"
-            type="button"
-            role="option"
-            aria-selected="${isCurrent}"
-            data-compare-pick="${k}"
-            ${isTaken ? 'disabled' : ''}
-          >${COMPARE[k].label}</button>
-        </li>
       `;
-    }).join('');
+      })
+      .join('');
 
     return `
       <div class="quiz-compare__col">
-        <div class="quiz-compare__select-wrap">
-          <button
-            class="quiz-compare__select"
-            type="button"
-            data-compare-toggle
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-label="Change product in column ${colIndex + 1}, currently ${data.label}"
-          >
-            <span>${data.label}</span>
-            <svg viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1l5 6 5-6" stroke="#302220" stroke-width="1.5"/></svg>
-          </button>
-          <ul class="quiz-compare__menu" role="listbox" aria-label="Products">${options}</ul>
-        </div>
-        <div class="quiz-compare__pricing">
-          <p class="quiz-compare__pricing-label">Pricing</p>
+        <div class="quiz-compare__pricing" style="--row: 1">
+          <p class="quiz-compare__pricing-label">${data.label}</p>
           <div class="quiz-compare__price">
             <p><span>$</span>${data.price}</p>
-            <span class="quiz-compare__price-sub">Annual subscription</span>
           </div>
         </div>
         ${categories}
@@ -450,9 +405,6 @@ export function initQuiz() {
     const el = document.createElement('div');
     el.className = 'quiz-result';
 
-    // Columns start on the quiz's recommendation and its natural counterpart;
-    // each dropdown then swaps its own column independently.
-    const compareKeys = [key, result.vs];
     el.innerHTML = `
       ${progressBar(FILL_STEPS.length - 1, true)}
       <div class="quiz-grid-row">
@@ -469,43 +421,16 @@ export function initQuiz() {
       </div>
       <div class="quiz-compare">
         <p class="quiz-compare__title display">Compare products</p>
-        <div class="quiz-compare__cols" data-compare-cols></div>
+        <div class="quiz-compare__cols">
+          ${compareColumn(key)}
+          ${compareColumn(result.vs)}
+        </div>
         <a class="quiz-detailed" href="https://dbeaver.com/edition/" target="_blank" rel="noopener">Detailed comparison page</a>
       </div>
     `;
 
-    const cols = el.querySelector('[data-compare-cols]');
-
-    function renderCols() {
-      cols.innerHTML =
-        compareColumn(compareKeys[0], 0, compareKeys[1]) +
-        compareColumn(compareKeys[1], 1, compareKeys[0]);
-    }
-    renderCols();
-
-    // Delegated from the stable .quiz-compare__cols wrapper so the handlers
-    // survive renderCols() swapping out both columns on every pick.
-    cols.addEventListener('click', (e) => {
-      const toggle = e.target.closest('[data-compare-toggle]');
-      if (toggle) {
-        const menu = toggle.nextElementSibling;
-        const willOpen = !menu.classList.contains('is-open');
-        closeCompareMenus();
-        menu.classList.toggle('is-open', willOpen);
-        toggle.setAttribute('aria-expanded', String(willOpen));
-        return;
-      }
-
-      const pick = e.target.closest('[data-compare-pick]');
-      if (!pick || pick.disabled) return;
-      const col = pick.closest('.quiz-compare__col');
-      const colIndex = [...cols.children].indexOf(col);
-      if (colIndex === -1) return;
-      compareKeys[colIndex] = pick.dataset.comparePick;
-      renderCols();
-    });
-
     el.querySelector('[data-back]').addEventListener('click', () => {
+      if (swapping || !history.length) return;
       const prev = history.pop();
       swapTo(renderStep(prev), -1);
     });
@@ -525,8 +450,9 @@ export function initQuiz() {
       syncCompareBtn();
       return;
     }
+    swapping = true;
     const current = root.firstElementChild;
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({ onComplete: () => { swapping = false; } });
     if (current) {
       tl.to(stepBody(current), { opacity: 0, y: -12 * direction, duration: 0.18, ease: 'power2.in' });
     }

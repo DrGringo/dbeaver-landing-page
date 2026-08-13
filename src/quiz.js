@@ -27,7 +27,7 @@ const TREE = {
     yes: 'ultimate',
   },
   adminDev: {
-    question: 'Do you need granular access to data for your teammates?',
+    question: 'Do you handle database admin or development tasks?',
     no: 'lite',
     yes: 'enterprise',
   },

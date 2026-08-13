@@ -499,16 +499,6 @@
 .logo-card--cvs .cvs img[src*='cvs-b'] {
   width: 61px;
 }
-.companies__pill {
-  display: inline-block;
-  margin-top: 22px;
-  padding: 10px 20px;
-  border-radius: var(--radius-round);
-  border: 1px solid rgba(48, 34, 32, 0.15);
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--c-brown);
-}
 
 /* ================================================================== *
  * AI webinar banner
@@ -934,16 +924,10 @@
  * ================================================================== */
 .ecosystem {
   position: relative;
-  padding: 140px 24px 96px;
+  padding: 340px 24px 96px;
   text-align: center;
   overflow: hidden;
 }
-.ecosystem__title {
-  font-size: 36px;
-  color: var(--c-brown);
-  margin-bottom: 120px;
-}
-
 .eco-cards {
   position: relative;
   display: flex;
@@ -1532,9 +1516,6 @@
     flex-basis: 260px;
     width: 260px;
     height: 260px;
-  }
-  .ecosystem__title {
-    font-size: 28px;
   }
   .eco-cards {
     flex-direction: column;

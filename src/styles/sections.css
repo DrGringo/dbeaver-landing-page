@@ -1106,6 +1106,27 @@
   scroll-padding-left: 24px;
   padding: 4px 24px 24px 24px;
   scrollbar-width: none;
+  /* Fade the cards out at both edges so the row reads as scrollable, the
+     same effect as .eco-cards::before. That one is an absolutely positioned
+     white overlay, which can't work here: an absolute child of an
+     overflow-x:auto box joins the scrollable area and slides away with the
+     cards. A mask is fixed to the scroll container's own box, so the fade
+     stays put while the content moves under it — and against this section's
+     white background it looks identical. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 80px,
+    #000 calc(100% - 80px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 80px,
+    #000 calc(100% - 80px),
+    transparent 100%
+  );
 }
 .testimonials__track::-webkit-scrollbar {
   display: none;

@@ -101,6 +101,7 @@ const COMPARE = {
   dbvr: {
     label: 'dbvr',
     price: '800',
+    type: 'CLI',
     features: {
       Connectivity: ['SQL database support', 'NoSQL/BigData database support', 'MCP Server integration'],
       'Administration & Security': ['Advanced security'],
@@ -109,6 +110,7 @@ const COMPARE = {
   dbvrCommunity: {
     label: 'dbvr Community',
     price: '0',
+    type: 'CLI',
     features: {
       Connectivity: ['SQL database support'],
     },
@@ -116,6 +118,7 @@ const COMPARE = {
   ultimate: {
     label: 'DBeaver Ultimate',
     price: '510',
+    type: 'Desktop',
     features: {
       Connectivity: ['SQL database support', 'NoSQL/BigData database support', 'AWS, GCP and Azure native support', 'Cloud Explorer & Cloud Storage'],
       'Data & SQL Management': ['SQL Editor & Query History', 'Visual Query Builder', 'Data Editor', 'AI assistant (OpenAI, GitHub Copilot, Gemini, Ollama, Azure, Bedrock, Claude)', '@ai command', 'Tableau integration'],
@@ -126,6 +129,7 @@ const COMPARE = {
   enterprise: {
     label: 'DBeaver Enterprise',
     price: '255',
+    type: 'Desktop',
     features: {
       Connectivity: ['SQL database support', 'NoSQL/BigData database support'],
       'Data & SQL Management': ['SQL Editor & Query History', 'Visual Query Builder', 'Data Editor', 'AI assistant (OpenAI, GitHub Copilot, Gemini, Ollama, Azure, Bedrock, Claude)', '@ai command', 'Tableau integration'],
@@ -136,6 +140,7 @@ const COMPARE = {
   lite: {
     label: 'DBeaver Lite',
     price: '113',
+    type: 'Desktop',
     features: {
       Connectivity: ['SQL database support', 'NoSQL/BigData database support'],
       'Data & SQL Management': ['SQL Editor & Query History', 'Visual Query Builder', 'Data Editor', 'AI assistant (OpenAI, GitHub Copilot, Gemini, Ollama, Azure, Bedrock, Claude)', '@ai command'],
@@ -146,6 +151,7 @@ const COMPARE = {
   dbeaverCommunity: {
     label: 'DBeaver Community',
     price: '0',
+    type: 'Desktop',
     features: {
       Connectivity: ['SQL database support'],
       'Data & SQL Management': ['SQL Editor & Query History', 'Data Editor', '@ai command'],
@@ -156,6 +162,7 @@ const COMPARE = {
   cloudbeaverCommunity: {
     label: 'CloudBeaver Community',
     price: '0',
+    type: 'Cloud',
     features: {
       Connectivity: ['SQL database support'],
       'Data & SQL Management': ['SQL Editor & Query History', 'Data Editor'],
@@ -165,6 +172,7 @@ const COMPARE = {
   cloudbeaverEnterprise: {
     label: 'CloudBeaver Enterprise',
     price: '1,025',
+    type: 'Cloud',
     features: {
       Connectivity: ['SQL database support', 'NoSQL/BigData database support', 'AWS, GCP and Azure native support', 'Cloud Explorer & Cloud Storage', 'MCP Server integration'],
       'Data & SQL Management': ['SQL Editor & Query History', 'Visual Query Builder', 'Data Editor', 'AI assistant (OpenAI, GitHub Copilot, Gemini, Ollama, Azure, Bedrock, Claude)', '@ai command'],
@@ -176,6 +184,7 @@ const COMPARE = {
   teamEdition: {
     label: 'DBeaver Team Edition',
     price: '810',
+    type: 'Hybrid',
     features: {
       Connectivity: ['SQL database support', 'NoSQL/BigData database support', 'AWS, GCP and Azure native support', 'Cloud Explorer & Cloud Storage', 'MCP Server integration'],
       'Data & SQL Management': ['SQL Editor & Query History', 'Visual Query Builder', 'Data Editor', 'AI assistant (OpenAI, GitHub Copilot, Gemini, Ollama, Azure, Bedrock, Claude)', '@ai command', 'Tableau integration'],
@@ -367,8 +376,10 @@ export function initQuiz() {
     return el;
   }
 
-  // One column of the comparison. Header is the product name on the left and
-  // its price on the right (Figma "Frame 1250", e.g. node 9665:13534).
+  // One column of the comparison. Header stacks the product name above a
+  // price row: the price on the left, a deployment-type pill ("CLI",
+  // "Desktop", "Cloud", "Hybrid") and "Annual subscription" label stacked on
+  // the right (Figma "Frame 1252"/"Frame 1253", e.g. node 9830:1643).
   function compareColumn(key) {
     const data = COMPARE[key];
     // `--row` drives grid-row so both columns share a row per category. Row 1
@@ -391,8 +402,12 @@ export function initQuiz() {
       <div class="quiz-compare__col">
         <div class="quiz-compare__pricing" style="--row: 1">
           <p class="quiz-compare__pricing-label">${data.label}</p>
-          <div class="quiz-compare__price">
-            <p><span>$</span>${data.price}</p>
+          <div class="quiz-compare__price-row">
+            <p class="quiz-compare__price"><span>$</span>${data.price}</p>
+            <div class="quiz-compare__meta">
+              <span class="quiz-compare__badge">${data.type}</span>
+              ${key === 'dbvrCommunity' ? '' : '<span class="quiz-compare__price-sub">Annual subscription</span>'}
+            </div>
           </div>
         </div>
         ${categories}

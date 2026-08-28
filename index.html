@@ -434,11 +434,17 @@
 
       <!-- ============================ ECOSYSTEM ============================ -->
       <section class="ecosystem" id="ecosystem">
+        <!-- Carousel of 8 cards, 5 shown at a time. ecosystem.js lays them
+             out along the arc further down and steps each one left by a slot
+             every 6s; the card that runs off the left fades out and returns
+             at the back. Cards are positioned individually, so .eco-cards
+             and the track are only containers - neither moves. -->
         <div class="eco-cards">
-          <article class="eco-card" data-reveal style="--rot: -20deg">
+          <div class="eco-cards__track" data-eco-track>
+          <article class="eco-card" data-reveal>
             <div class="eco-card__panel">
-              <h3>Authentication</h3>
-              <div class="eco-card__logos">
+              <h3>Database<br />Authentication</h3>
+              <div class="eco-card__logos eco-card__logos--lg">
                 <img src="/assets/ecosystem/auth-1.png" alt="" />
                 <img src="/assets/ecosystem/cloud-1.png" alt="" />
                 <img src="/assets/ecosystem/auth-3.png" alt="" />
@@ -447,20 +453,42 @@
             </div>
           </article>
 
-          <article class="eco-card" data-reveal style="--rot: -10deg">
+          <article class="eco-card" data-reveal>
+            <div class="eco-card__panel">
+              <h3>Visualization tools</h3>
+              <div class="eco-card__logos">
+                <img class="eco-icon-lg" src="/assets/ecosystem/viz-grafana.svg" alt="Grafana" />
+                <img class="eco-logo-80" src="/assets/ecosystem/viz-powerbi.svg" alt="Power BI" />
+                <img class="eco-logo-80" src="/assets/ecosystem/viz-tableau.svg" alt="Tableau" />
+              </div>
+            </div>
+          </article>
+
+          <article class="eco-card" data-reveal>
             <div class="eco-card__panel">
               <h3>Orchestration</h3>
-              <div class="eco-card__logos">
+              <div class="eco-card__logos eco-card__logos--lg">
                 <img src="/assets/ecosystem/orch-1.png" alt="Docker" />
                 <img src="/assets/ecosystem/orch-2.png" alt="Kubernetes" />
               </div>
             </div>
           </article>
 
-          <article class="eco-card" data-reveal style="--rot: 0deg">
+          <article class="eco-card" data-reveal>
+            <div class="eco-card__panel">
+              <h3>Office</h3>
+              <div class="eco-card__logos eco-card__logos--sm">
+                <img src="/assets/ecosystem/office-googledrive.svg" alt="Google Drive" />
+                <img src="/assets/ecosystem/office-libreoffice.svg" alt="LibreOffice" />
+                <img src="/assets/ecosystem/office-msoffice.svg" alt="Microsoft Office" />
+              </div>
+            </div>
+          </article>
+
+          <article class="eco-card" data-reveal>
             <div class="eco-card__panel">
               <h3>Databases<br />in the Cloud</h3>
-              <div class="eco-card__logos">
+              <div class="eco-card__logos eco-card__logos--xl">
                 <img src="/assets/ecosystem/cloud-1.png" alt="AWS" />
                 <img src="/assets/ecosystem/cloud-2.png" alt="Azure" />
                 <img src="/assets/ecosystem/cloud-3.png" alt="Google Cloud" />
@@ -468,7 +496,7 @@
             </div>
           </article>
 
-          <article class="eco-card" data-reveal style="--rot: 10deg">
+          <article class="eco-card" data-reveal>
             <div class="eco-card__panel">
               <h3>Ai integration</h3>
               <div class="eco-card__logos eco-card__logos--ai">
@@ -494,10 +522,10 @@
             </div>
           </article>
 
-          <article class="eco-card" data-reveal style="--rot: 20deg">
+          <article class="eco-card" data-reveal>
             <div class="eco-card__panel">
               <h3>Database<br />On-Premise</h3>
-              <div class="eco-card__logos">
+              <div class="eco-card__logos eco-card__logos--onprem">
                 <img src="/assets/ecosystem/onprem-1.png" alt="" />
                 <img src="/assets/ecosystem/onprem-2.png" alt="" />
                 <img src="/assets/ecosystem/onprem-3.png" alt="" />
@@ -505,7 +533,29 @@
               </div>
             </div>
           </article>
+
+          <article class="eco-card" data-reveal>
+            <div class="eco-card__panel">
+              <h3>DevOps</h3>
+              <div class="eco-card__logos">
+                <img class="eco-icon-lg" src="/assets/ecosystem/devops-flyway.svg" alt="Flyway" />
+                <img class="eco-logo-70" src="/assets/ecosystem/devops-liquibase.svg" alt="Liquibase" />
+              </div>
+            </div>
+          </article>
+          </div>
         </div>
+
+        <!-- The curve the ecosystem cards sit on and travel along. Draws
+             nothing (see .ecosystem__arc-guide in sections.css), but do NOT
+             remove it: ecosystem.js reads this path's `d` to place and rotate
+             every card, so deleting it drops the cards back to a flat row.
+             The viewBox is 0-100 stretched to the section, so the numbers are
+             percentages of section width/height - edit them to reshape the
+             fan and the cards follow. -->
+        <svg class="ecosystem__arc-guide" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 0 62 Q 50 38 100 62" />
+        </svg>
 
         <div class="ecosystem__wordmark-wrap" data-reveal>
           <p class="ecosystem__wordmark">

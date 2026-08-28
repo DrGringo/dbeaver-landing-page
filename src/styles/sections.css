@@ -452,7 +452,10 @@
    started - no visible seam or reset. The edge mask fades logos in/out
    rather than clipping them mid-shape, echoing .testimonials__track's
    mask (sections.css). See index.html for why the second track is
-   aria-hidden and stripped of alt text. */
+   aria-hidden. Its gap must match .companies__track's - it's the space
+   at the loop seam itself, between the last card of one copy and the
+   first of the next, and a mismatch there would show up as a visible
+   hitch once a second. */
 .companies__marquee {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
@@ -460,7 +463,7 @@
 }
 .companies__track-group {
   display: flex;
-  gap: 16px;
+  gap: 48px;
   width: max-content;
   animation: companies-marquee 84s linear infinite;
 }
@@ -469,7 +472,7 @@
 }
 .companies__track {
   display: flex;
-  gap: 16px;
+  gap: 48px;
   align-items: center;
 }
 @keyframes companies-marquee {

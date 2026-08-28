@@ -445,12 +445,59 @@
   color: var(--c-brown);
   margin-bottom: 28px;
 }
-.companies__row {
+/* Seamless marquee: .companies__track-group holds two identical
+   .companies__track copies and is animated exactly -50% (its own
+   half-width) on a linear infinite loop, so the moment the first track
+   scrolls out of view the second is sitting exactly where the first one
+   started - no visible seam or reset. The edge mask fades logos in/out
+   rather than clipping them mid-shape, echoing .testimonials__track's
+   mask (sections.css). See index.html for why the second track is
+   aria-hidden and stripped of alt text. */
+.companies__marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
+}
+.companies__track-group {
   display: flex;
-  flex-wrap: wrap;
   gap: 16px;
-  justify-content: center;
+  width: max-content;
+  animation: companies-marquee 84s linear infinite;
+}
+.companies__marquee:hover .companies__track-group {
+  animation-play-state: paused;
+}
+.companies__track {
+  display: flex;
+  gap: 16px;
   align-items: center;
+}
+@keyframes companies-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* Users who've asked for less motion get the original static, wrapped
+   grid back - constant sideways scroll is exactly the kind of motion
+   prefers-reduced-motion exists to opt out of. No JS branch needed: the
+   duplicate track (already hidden from assistive tech) is just as easily
+   hidden from everyone here, and the visible track wraps like a normal
+   flex row once the animation and fixed width are switched off. */
+@media (prefers-reduced-motion: reduce) {
+  .companies__marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .companies__track-group {
+    width: auto;
+    animation: none;
+    transform: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .companies__track[aria-hidden='true'] {
+    display: none;
+  }
 }
 .logo-card {
   background: var(--c-white);

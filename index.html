@@ -112,19 +112,64 @@
       <section class="companies" id="companies">
         <div class="container">
           <p class="companies__title" data-reveal>Trusted by</p>
-          <div class="companies__row">
-            <div class="logo-card" data-logo><img src="/assets/brand/amazon.svg" alt="Amazon" /></div>
-            <div class="logo-card" data-logo><img src="/assets/brand/usbancorp.svg" alt="U.S. Bancorp" /></div>
-            <div class="logo-card" data-logo><img src="/assets/brand/mastercard.svg" alt="Mastercard" /></div>
-            <div class="logo-card logo-card--cvs" data-logo>
-              <span class="cvs">
-                <img src="/assets/brand/cvs-a.svg" alt="" />
-                <img src="/assets/brand/cvs-b.svg" alt="CVS Health" />
-              </span>
+          <!-- Seamless marquee: two identical tracks laid side by side inside
+               a flex group, which is translated by exactly -50% (its own
+               half-width) on a linear infinite loop. The moment the first
+               track has scrolled fully out of view, the second is sitting
+               exactly where the first started, so the loop shows no seam.
+               The second track is a plain duplicate for that purpose only,
+               so it's aria-hidden to keep screen readers from announcing
+               every logo twice. Falls back to the original static, wrapped
+               grid for prefers-reduced-motion (see sections.css). -->
+          <div class="companies__marquee">
+            <div class="companies__track-group">
+              <div class="companies__track">
+                <div class="logo-card" data-logo><img src="/assets/brand/amazon.svg" alt="Amazon" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/usbancorp.svg" alt="U.S. Bancorp" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/mastercard.svg" alt="Mastercard" /></div>
+                <div class="logo-card logo-card--cvs" data-logo>
+                  <span class="cvs">
+                    <img src="/assets/brand/cvs-a.svg" alt="" />
+                    <img src="/assets/brand/cvs-b.svg" alt="CVS Health" />
+                  </span>
+                </div>
+                <div class="logo-card" data-logo><img src="/assets/brand/apple.svg" alt="Apple" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/tmobile.svg" alt="T-Mobile" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/united.svg" alt="United Airlines" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/microsoft.svg" alt="Microsoft" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/samsung.svg" alt="Samsung" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/netflix.svg" alt="Netflix" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/nike.svg" alt="Nike" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/citibank.svg" alt="Citibank" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/sony.svg" alt="Sony" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/hp.svg" alt="HP" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/western-union.svg" alt="Western Union" /></div>
+                <div class="logo-card" data-logo><img src="/assets/brand/oncor.svg" alt="Oncor" /></div>
+              </div>
+              <div class="companies__track" aria-hidden="true">
+                <div class="logo-card"><img src="/assets/brand/amazon.svg" alt="Amazon" /></div>
+                <div class="logo-card"><img src="/assets/brand/usbancorp.svg" alt="U.S. Bancorp" /></div>
+                <div class="logo-card"><img src="/assets/brand/mastercard.svg" alt="Mastercard" /></div>
+                <div class="logo-card logo-card--cvs">
+                  <span class="cvs">
+                    <img src="/assets/brand/cvs-a.svg" alt="" />
+                    <img src="/assets/brand/cvs-b.svg" alt="CVS Health" />
+                  </span>
+                </div>
+                <div class="logo-card"><img src="/assets/brand/apple.svg" alt="Apple" /></div>
+                <div class="logo-card"><img src="/assets/brand/tmobile.svg" alt="T-Mobile" /></div>
+                <div class="logo-card"><img src="/assets/brand/united.svg" alt="United Airlines" /></div>
+                <div class="logo-card"><img src="/assets/brand/microsoft.svg" alt="Microsoft" /></div>
+                <div class="logo-card"><img src="/assets/brand/samsung.svg" alt="Samsung" /></div>
+                <div class="logo-card"><img src="/assets/brand/netflix.svg" alt="Netflix" /></div>
+                <div class="logo-card"><img src="/assets/brand/nike.svg" alt="Nike" /></div>
+                <div class="logo-card"><img src="/assets/brand/citibank.svg" alt="Citibank" /></div>
+                <div class="logo-card"><img src="/assets/brand/sony.svg" alt="Sony" /></div>
+                <div class="logo-card"><img src="/assets/brand/hp.svg" alt="HP" /></div>
+                <div class="logo-card"><img src="/assets/brand/western-union.svg" alt="Western Union" /></div>
+                <div class="logo-card"><img src="/assets/brand/oncor.svg" alt="Oncor" /></div>
+              </div>
             </div>
-            <div class="logo-card" data-logo><img src="/assets/brand/apple.svg" alt="Apple" /></div>
-            <div class="logo-card" data-logo><img src="/assets/brand/tmobile.svg" alt="T-Mobile" /></div>
-            <div class="logo-card" data-logo><img src="/assets/brand/united.svg" alt="United Airlines" /></div>
           </div>
         </div>
       </section>

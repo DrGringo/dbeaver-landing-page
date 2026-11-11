@@ -188,7 +188,7 @@
   function save() {
     const data = { mode };
     ids.forEach(id => data[id] = el(id).value);
-    localStorage.setItem(STORE, JSON.stringify(data));
+    try { localStorage.setItem(STORE, JSON.stringify(data)); } catch (e) {}
   }
 
   // ---------- formatting ----------

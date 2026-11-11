@@ -107,10 +107,17 @@
       <div class="field"><input id="armInPct" type="number" step="any" min="0" value="0"><span class="unit">%</span></div>
 
       <h2 style="margin-top:20px"><span class="num">3</span>Снятие в банкомате Сербии (USD → RSD)</h2>
+      <label for="atmPreset">Банкомат</label>
+      <div class="field"><select id="atmPreset">
+        <option value="halk">Halkbank — без комиссии (проверено)</option>
+        <option value="intesa_rsd">Banca Intesa — 550 RSD, CHARGE IN RSD</option>
+        <option value="intesa_usd">Banca Intesa — 550 RSD, CHARGE IN USD (наценка 5%)</option>
+        <option value="custom">Другой — ввести вручную</option>
+      </select></div>
       <label for="chargeIn">Какую кнопку жмёте в банкомате</label>
       <div class="field"><select id="chargeIn">
-        <option value="usd">CHARGE IN USD — конвертирует банкомат</option>
         <option value="rsd">CHARGE IN RSD — конвертирует ваш банк / Visa</option>
+        <option value="usd">CHARGE IN USD — конвертирует банкомат</option>
       </select></div>
       <div id="dccBox">
         <label for="dccRate">Курс банкомата (с экрана)</label>
@@ -120,12 +127,19 @@
         <div class="hint">Наценка уже входит в курс выше. Поле нужно только для того, чтобы показать её отдельной строкой.</div>
       </div>
       <label for="usdRsd">Курс Visa / вашего банка (для CHARGE IN RSD)</label>
-      <div class="field"><input id="usdRsd" type="number" step="any" min="0" value="99.5"><span class="unit">RSD за $1</span></div>
-      <div class="hint">По умолчанию это курс банкомата без наценки 5%: 1 / (0,0105525 / 1,05) ≈ 99,5. Реальный курс Visa или вашего банка уточните по факту списания.</div>
+      <div class="field"><input id="usdRsd" type="number" step="any" min="0" value="102.761"><span class="unit">RSD за $1</span></div>
+      <div class="hint">По умолчанию это фактический курс: в Halkbank за 53 000 RSD с карты списали $515,76 (≈ 102,76 RSD за $1, все комиссии внутри).</div>
+      <label>Посчитать курс по фактическому снятию</label>
+      <div style="display:flex;gap:6px">
+        <div class="field"><input id="factRsd" type="number" step="any" min="0" value="53000"><span class="unit">RSD</span></div>
+        <div class="field"><input id="factUsdOut" type="number" step="any" min="0" value="515.76"><span class="unit">$</span></div>
+      </div>
+      <div class="actions" style="margin-top:6px"><button type="button" id="factOutBtn">Применить курс (комиссии банкомата и банка обнулятся)</button></div>
+      <div class="hint" id="factOutHint"></div>
       <label for="fxPct">Комиссия армянского банка за конвертацию (для CHARGE IN RSD)</label>
       <div class="field"><input id="fxPct" type="number" step="any" min="0" value="0"><span class="unit">%</span></div>
       <label for="atmFee">Комиссия сербского банкомата за снятие</label>
-      <div class="field"><input id="atmFee" type="number" step="any" min="0" value="550"><span class="unit">RSD</span></div>
+      <div class="field"><input id="atmFee" type="number" step="any" min="0" value="0"><span class="unit">RSD</span></div>
       <div class="hint">Берётся за каждое снятие.</div>
       <label for="armAtmPct">Комиссия армянского банка за снятие в чужом банкомате</label>
       <div class="field"><input id="armAtmPct" type="number" step="any" min="0" value="0"><span class="unit">%</span></div>
@@ -143,7 +157,7 @@
       <div class="big">
         <div><small id="bigLabel1">Получите наличными</small><b id="big1">—</b></div>
         <div><small>Итоговый курс</small><b id="big2">—</b></div>
-        <div><small>Потери на комиссиях и курсах</small><b id="big3">—</b></div>
+        <div><small>Переплата vs лучший вариант (Halkbank, CHARGE IN RSD)</small><b id="big3">—</b></div>
       </div>
       <table id="breakdown"></table>
       <div class="warn" id="warn"></div>
@@ -158,8 +172,8 @@
 <script>
 (function () {
   const ids = ['amountRub','amountRsd','idpayRate','idpayPct','idpayFix','idpayPctMode','armInPct',
-               'usdRsd','fxPct','atmFee','armAtmPct','armAtmMin','atmLimit','atmStep','factRub','factUsd','chargeIn','dccRate','dccMarkup'];
-  const STORE = 'rub-rsd-calc-v3';
+               'usdRsd','fxPct','atmFee','armAtmPct','armAtmMin','atmLimit','atmStep','factRub','factUsd','chargeIn','dccRate','dccMarkup','atmPreset','factRsd','factUsdOut'];
+  const STORE = 'rub-rsd-calc-v4';
   const el = id => document.getElementById(id);
   const defaults = {};
   ids.forEach(id => defaults[id] = el(id).value);
@@ -289,7 +303,7 @@
     const ideal = r.R / p.idpayRate * p.usdRsd;
     const effRubPerRsd = cash > 0 ? r.R / cash : NaN;
     const lossRsd = ideal - cash - Math.max(0, r.leftover) * p.usdRsd;
-    const lossRub = lossRsd / p.usdRsd * p.idpayRate;
+    const lossRub = Math.max(0, lossRsd / p.usdRsd * p.idpayRate);
 
     el('bigLabel1').textContent = mode === 'forward' ? 'Получите наличными' : 'Нужно перевести';
     el('big1').textContent = mode === 'forward' ? rsd(cash) : rub(r.R);
@@ -308,7 +322,7 @@
     r.ops.forEach(o => { byW[o.W] = (byW[o.W] || 0) + 1; });
     const opsText = Object.keys(byW).sort((a, b) => b - a).map(w => `${byW[w]} × ${rsd(+w)}`).join(' + ');
     row(`Снятий в банкомате: ${r.ops.length}` + (opsText ? ` (${opsText})` : ''), rsd(cash));
-    row(`Комиссия банкомата ${rsd(p.atmFee)} × ${r.ops.length}`, '−' + rsd(atmFees) + ' ≈ ' + usd(atmFees / rsdPerUsd(p)), 'fee');
+    if (p.atmFee > 0) row(`Комиссия банкомата ${rsd(p.atmFee)} × ${r.ops.length}`, '−' + rsd(atmFees) + ' ≈ ' + usd(atmFees / rsdPerUsd(p)), 'fee');
     if (p.chargeIn === 'usd') row(`Курс банкомата: 1 RSD = ${fmt(p.dccRate, 7)} $ (≈ ${fmt(1 / p.dccRate, 2)} RSD/$)`, '');
     if (markups > 0) row(`  в т.ч. наценка банкомата ${fmt(p.dccMarkup * 100, 2)}%`, '−' + usd(markups), 'fee');
     if (p.fxPct > 0) row('Комиссия за конвертацию', '−' + usd(fxFees), 'fee');
@@ -325,7 +339,7 @@
     // Compare with the other ATM button
     const alt = Object.assign({}, p, { chargeIn: p.chargeIn === 'usd' ? 'rsd' : 'usd' });
     let cmp = '';
-    if (alt.chargeIn === 'rsd' || alt.dccRate > 0) {
+    if (p.chargeIn === 'usd') {
       const a = mode === 'forward' ? forward(alt) : reverse(alt);
       const aCash = a.ops.reduce((s, o) => s + o.W, 0);
       const name = alt.chargeIn === 'usd' ? 'CHARGE IN USD' : 'CHARGE IN RSD';
@@ -348,6 +362,26 @@
   });
   ['factRub','factUsd'].forEach(id => el(id).addEventListener('input', showFact));
   showFact();
+
+  const PRESETS = {
+    halk:       { atmFee: 0, chargeIn: 'rsd' },
+    intesa_rsd: { atmFee: 550, chargeIn: 'rsd' },
+    intesa_usd: { atmFee: 550, chargeIn: 'usd', dccRate: 0.0105525, dccMarkup: 5 },
+  };
+  el('atmPreset').addEventListener('change', () => {
+    const pr = PRESETS[el('atmPreset').value]; if (!pr) return;
+    Object.keys(pr).forEach(k => el(k).value = pr[k]); save(); render();
+  });
+  ['atmFee','chargeIn','dccRate','dccMarkup'].forEach(id => el(id).addEventListener('input', () => { el('atmPreset').value = 'custom'; save(); }));
+  function factOut() { const r = num('factRsd'), u = num('factUsdOut'); return r > 0 && u > 0 ? r / u : NaN; }
+  function showFactOut() { const f = factOut(); el('factOutHint').textContent = Number.isFinite(f) ? 'Фактический курс: ' + fmt(f, 3) + ' RSD за $1' : ''; }
+  el('factOutBtn').addEventListener('click', () => {
+    const f = factOut(); if (!Number.isFinite(f)) return;
+    el('usdRsd').value = f.toFixed(3); ['fxPct','atmFee','armAtmPct','armAtmMin'].forEach(id => el(id).value = 0);
+    el('chargeIn').value = 'rsd'; el('atmPreset').value = 'custom'; save(); render();
+  });
+  ['factRsd','factUsdOut'].forEach(id => el(id).addEventListener('input', showFactOut));
+  showFactOut();
 
   function setMode(m) {
     mode = m;
